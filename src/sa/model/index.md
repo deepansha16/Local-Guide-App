@@ -244,11 +244,6 @@ rectangle Environment {
 
 *Measure*: benchmark or target value defining a successful response
 
-Pass: 3 scenarios
-
-Good: >3 scenarios
-
-Exceed: >6 scenarios using challenging qualities
 
 }
 
