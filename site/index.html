@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Local Guide Application</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Local Guide Application</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#software-architecture-of-local-guide-by-deepansha-chowdhary" class="nav-link">Software Architecture of Local Guide by Deepansha Chowdhary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#getting-started" class="nav-link">Getting started</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-domain-selection" class="nav-link">Ex - Domain Selection</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-architectural-decision-records" class="nav-link">Ex - Architectural Decision Records</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#adr-1-implementation-of-offline-mode" class="nav-link">ADR 1 : Implementation of Offline Mode</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#adr-2-programming-language" class="nav-link">ADR 2 : Programming Language</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#adr-3-monetization-model" class="nav-link">ADR 3 : Monetization Model</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-quality-attribute-scenario" class="nav-link">Ex - Quality Attribute Scenario</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#example-scenario" class="nav-link">Example Scenario</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#local-guide-scenarios" class="nav-link">Local Guide Scenarios</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-quality-attribute-tradeoff" class="nav-link">Ex - Quality Attribute Tradeoff</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#portability-vs-performance-example" class="nav-link">Portability vs. Performance (Example)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#trade-offs" class="nav-link">Trade-offs</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#extensibility-and-design-consistency" class="nav-link">Extensibility and Design Consistency</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#customizability-and-composability" class="nav-link">Customizability and Composability</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#adaptability-and-performance" class="nav-link">Adaptability and Performance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-feature-modeling" class="nav-link">Ex - Feature Modeling</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-context-diagram" class="nav-link">Ex - Context Diagram</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-component-model-top-down" class="nav-link">Ex - Component Model: Top-Down</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#logical-view" class="nav-link">Logical View</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#process-views" class="nav-link">Process Views</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-component-model-bottom-up" class="nav-link">Ex - Component Model: Bottom-Up</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#logical-view_1" class="nav-link">Logical View</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#process-views_1" class="nav-link">Process Views</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#adr-1-selection-of-ui-toolkit" class="nav-link">ADR 1 : Selection of UI toolkit</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#adr-2-selection-of-a-different-database" class="nav-link">ADR 2 : Selection of a different database</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-interfaceapi-specification" class="nav-link">Ex - Interface/API Specification</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#api-specification" class="nav-link">API Specification:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#open-api-description" class="nav-link">Open API Description</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-connector-view" class="nav-link">Ex - Connector View</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-adapters-and-coupling" class="nav-link">Ex - Adapters and Coupling</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#hints" class="nav-link">Hints</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-physical-and-deployment-views" class="nav-link">Ex - Physical and Deployment Views</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#adr-for-deployment-strategy" class="nav-link">ADR for Deployment Strategy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-availability-and-services" class="nav-link">Ex - Availability and Services</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-scalability" class="nav-link">Ex - Scalability</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ex-flexibility" class="nav-link">Ex - Flexibility</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="software-architecture-of-local-guide-by-deepansha-chowdhary">Software Architecture of Local Guide by Deepansha Chowdhary</h2>
+<h1 id="getting-started">Getting started</h1>
+<p>You will use <a href="https://www.markdownguide.org/cheat-sheetplan">Markdown</a> and <a href="https://plantuml.com/">PlantUML</a> to describe a software architecture model about your own project.</p>
+<p>This document will grow during the semester as you sketch and refine your software architecture model.</p>
+<p>When you are done with each task, please push so we can give you feedback about your work.</p>
+<p>We begin by selecting a suitable project domain.</p>
+<h1 id="ex-domain-selection">Ex - Domain Selection</h1>
+<p>{.instructions</p>
+<p>Submit the name and brief description (about 100 words) of your domain using the following vision statement template:</p>
+<pre><code>For [target customers] 
+Who [need/opportunity/problem]
+The [name your project]
+Is  [type of project]
+That [major features, core benefits, compelling reason to buy]
+Unlike [current reality or competitors]
+Our Project [summarize main advantages over status quo, unique selling point]
+</code></pre>
+<p>Please indicate if your choice is:</p>
+<ul>
+<li>a project you have worked on in the past (by yourself or with a team)</li>
+<li>a project you are going to work on this semester in another lecture (which one?)</li>
+<li>a new project you plan to build in the future</li>
+<li>some existing open source project you are interested to contribute to</li>
+</ul>
+<p>The chosen domain should be unique for each student.</p>
+<p>Please be ready to give a 2 minute presentation about it (you can use a slide but it's not necessary)</p>
+<p>Hint: to choose a meaningful project look at the rest of the modeling tasks which you are going to perform in the context of your domain.</p>
+<p>}</p>
+<p>Project Name: <em>Local Guide</em></p>
+<p>Project Type:</p>
+<p>Vision Statement:</p>
+<p>For [target customers] Youth, people under 30 years, essentially newcomers who are planning to shift to Lugano</p>
+<p>Who [need/opportunity/problem]</p>
+<p>Google maps exists, but it exhibits a very global outlook on everything. You might see a lot of supermarkets in the search list, but what about the cheapest one? Or the one with the best quality? Results are vast, but often not very  precise. Not only that, Google searches can get messy, require a lot of memory retention on users part, for someone who has never set foot in foregin land - settling down can become a nightmare. Having observing students on various groups and forums, despite the vast amount of info available on the internet, many people remain clueless about the most basic needs, which in fact are the most important ones. For that purpose,such apps are the need of the hour, as the summarize the exact information an individual may require.</p>
+<p>The Local Guide</p>
+<p>Is  [type of project] a mobile application</p>
+<p>That [major features, core benefits, compelling reason to buy]</p>
+<p>Features:
+* Distinct categories for each necessity, : transportation, clothes, furniture, shopping, medical, financial,work related etc
+* Basic info for every category will be listed, most common banks, mobile network providers, waste management rules etc
+* All categories have the best option listed for them, and links provided for more additional info
+* Language mode so users are able to read at their own comfort
+* Filters for every option based on: prices, distance, quality ratings (given by the users)
+* Users can compare prices of items between two shops
+* Users will be offered incentives, discounts to motivate them to review places visited by them more
+* As a future prospect: to add modes in the app, traveler and new settler mode: to help personalize the users experience</p>
+<p>Why this app?</p>
+<p>Shifting to a new country is a very different experience, something that no one can ever be fully well prepared for - what more could someone yearn for than a curated view of the best options for your basic amenities? Local Guide gets you exactly that - be it anything you want to know, best insurance, best bank to open an account in, cheap shopping options - everything is there in the app. Everyone knows the big names, but what the local shops, that don't turn up in the google search results, that actually keep relevant stuff - is what this app focuses on.</p>
+<p>Unlike [current reality or competitors] Google Maps</p>
+<p>Our Project [summarize main advantages over status quo, unique selling point]
+More localized view of things, considering a students point of view - keeping in mind their budget and all the basic amenities that one needs in a new place. Removes the need to search for multiple things one at a time, all the information is available for you in one single app</p>
+<p>Additional Information:</p>
+<p>This is a new project I plan on implementing in the future.</p>
+<h1 id="ex-architectural-decision-records">Ex - Architectural Decision Records</h1>
+<p>{.instructions</p>
+<p>Software architecture is about making design decisions that will impact the quality of the software you plan to build.</p>
+<p>Let's practice how to describe an architectural decision. We will keep using ADRs to document architectural decisions in the rest of the model.</p>
+<p>Use the following template to capture one or more architectural design decisions in the context of your project domain</p>
+<p>Pass: 1 ADR</p>
+<p>Good: 2 ADR</p>
+<p>Exceed: &gt;2 ADR</p>
+<p>}</p>
+<p><img alt="Architectural Decision Record Template" src="examples/decision-template.madr" /></p>
+<h2 id="adr-1-implementation-of-offline-mode">ADR 1 : Implementation of Offline Mode</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Database: Realm Database</p>
+<ol>
+<li>What was the context for your decision?</li>
+</ol>
+<p>The main aim of this decision is to find the most beneficial and optimal solution that takes into consideration the functionalities of the Local Guide app. The main requirement that is into focus, is that the data and the user interface of the application should be made available to the user at all times,with or without network connection.</p>
+<p>What is the goal you are trying to achieve?</p>
+<p>Allow users to access all the UI and information of the app offline.</p>
+<p>What are the constraints?</p>
+<p>Limitation on a single string's length.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision impacts the entire architecture as the selection of the database is of prime importance, because it will be the main storage for all the data required for the mobile app.</p>
+<ol>
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can I give the users the benefit of accessing the information at all times?</p>
+<ol>
+<li>
+<p>Which alternative options did you consider?</p>
+</li>
+<li>
+<p>SQLite Database</p>
+</li>
+<li>CoreData</li>
+<li>
+<p>Realm Database</p>
+</li>
+<li>
+<p>Which one did you choose?</p>
+</li>
+</ol>
+<p>Realm Database</p>
+<ol>
+<li>What is the main reason for that?</li>
+</ol>
+<p>It fulfills the main purpose of the application, to give users the feature to access all the information even when offline, in scenarios where there is no access to data or Wifi and also it is fully compatible with Java, which will be used to develop the mobile app. </p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Essentially designed for offline use as it can handle the unpredictability concerning mobile apps, such as lost connections, devices being shut down at unfavorable timings and so on. As it is offline first, it is always read from and written to the local database and not over the network.</li>
+<li>As this is a local guide app, the most important component will the keeping the UI in sync, realm used live objects which always reference the most up-to-date data on disk when accessed. </li>
+<li>As it runs on the client devices, storing, accessing and updating the data is simple.</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>As Realm offers many features, it consequently requires a bit more effort for implementation.</li>
+</ul>
+<h2 id="adr-2-programming-language">ADR 2 : Programming Language</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Language: Java</p>
+<ol>
+<li>What was the context for your decision?</li>
+</ol>
+<p>The main purpose of this decision was to find the suitable programming language that will be compatible with the database selected in the previous decision.</p>
+<p>What is the goal you are trying to achieve?</p>
+<p>Compatibility with database and development of mobile app.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision applies to the entire project and is of upmost importance.</p>
+<ol>
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can we find a suitable language that interoperates with the chosen database?</p>
+<ol>
+<li>
+<p>Which alternative options did you consider?</p>
+</li>
+<li>
+<p>Kotlin</p>
+</li>
+<li>Dart</li>
+<li>C++</li>
+<li>
+<p>Java</p>
+</li>
+<li>
+<p>Which one did you choose?</p>
+</li>
+</ol>
+<p>Java</p>
+<ol>
+<li>What is the main reason for that?</li>
+</ol>
+<p>Java has one of the most intensive support available, which makes it better for the team to develop the application. Plus, as the project requires several other API'S such as geo location services,language translators, database functions, java fulfills the goal.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Versatile to integrate distinctive apps and functions</li>
+<li>Secure environment for design and development</li>
+<li>Has a lot of built in tools and rich set of library.</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>Takes longer time to run</li>
+</ul>
+<h2 id="adr-3-monetization-model">ADR 3 : Monetization Model</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Model: Combination of In app purchases and Sponsorship</p>
+<ol>
+<li>What was the context for your decision?</li>
+</ol>
+<p>The purpose to be looked into is how will the app be monetized after its post deployment stage.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The scope of this decision extends to the post deployment stage of the application</p>
+<ol>
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>What will be the revenue generation strategy of the app?</p>
+<ol>
+<li>
+<p>Which alternative options did you consider?</p>
+</li>
+<li>
+<p>In-App Advertising</p>
+</li>
+<li>Pay to download apps</li>
+<li>Paywalled Content</li>
+<li>Transactions Commissions</li>
+<li>Subscriptions</li>
+<li>
+<p>In app purchases</p>
+</li>
+<li>
+<p>Which one did you choose?</p>
+</li>
+</ol>
+<p>Combination of the subscription and in app purchases model.</p>
+<ol>
+<li>What is the main reason for that?</li>
+</ol>
+<p>The reason for selecting the combination is to divide the monetization into two different strategies, as one strategy can often prove to become outdated after some time, or not favorable for the business.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>In-app purchases help in promotions of the application's unique functionalities</li>
+<li>Subscriptions are beneficial to users in the long run, which in turn increase good word of mouth for both the app and the businesses connected with it</li>
+<li>Reduced costs of acquiring new customers.</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>The revenue generation process could be a bit slow and time consuming, as it takes time to build the loyalty of customers.</li>
+</ul>
+<h1 id="ex-quality-attribute-scenario">Ex - Quality Attribute Scenario</h1>
+<p>{.instructions</p>
+<ol>
+<li>
+<p>Pick a scenario for a specific quality attribute. Describe it with natural language.</p>
+</li>
+<li>
+<p>Refine the scenario using the following structure:</p>
+</li>
+</ol>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle Environment {
+
+[Source] -&gt; [System] : Stimulus
+
+[System] -&gt; [Measure] : Response
+
+}
+
+@enduml
+</code></pre>
+<p><em>Stimulus</em>: condition affecting the system</p>
+<p><em>Source</em>: entity generating the stimulus</p>
+<p><em>Environment</em>: context under which stimulus occurred (e.g., build, test, deployment, startup, normal operation, overload, failure, attack, change)</p>
+<p><em>Response</em>: observable result of the stimulus</p>
+<p><em>Measure</em>: benchmark or target value defining a successful response</p>
+<p>Pass: 3 scenarios</p>
+<p>Good: &gt;3 scenarios</p>
+<p>Exceed: &gt;6 scenarios using challenging qualities</p>
+<p>}</p>
+<h2 id="example-scenario">Example Scenario</h2>
+<p>Quality: <em>Recoverability</em></p>
+<p>Scenario: In case of power failure, rebooting the system should take up to 20 seconds.</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle &quot;After Power has been restored&quot; {
+
+rectangle &quot;Admin&quot; as Source
+rectangle &quot;max 20s&quot; as Measure
+
+Source -&gt; [System] : &quot;Boot&quot;
+
+[System] -&gt; [Measure] : &quot;Online&quot;
+
+}
+
+@enduml
+</code></pre>
+<h2 id="local-guide-scenarios">Local Guide Scenarios</h2>
+<p>Quality: <em>Availability</em></p>
+<p>Scenario: In case of loss of network connectivity on the users side, the system is supposed to fetch the required data from realm, and sync it with the interface to be displayed to the user.</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle “If Network Connection Interrupts” {
+
+rectangle “Application” as Source
+rectangle “Display UI and content” as Measure
+
+Source -&gt; [Realm DB] : “Fetches data”
+
+[Realm DB] -&gt; [Measure] : “Sync data from DB with UI”
+
+}
+
+@enduml
+</code></pre>
+<p>Quality: <em>Modifiability</em></p>
+<p>Scenario: Developer wants to update details in the database for a particular category</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle “When updating Database” {
+
+rectangle “Developer” as Source
+rectangle “Category information consequently gets updated” as Measure
+
+Source -&gt; [System] : “ make changes to content for a particular category”
+
+[System] -&gt; [Measure] : “Runs the appropriate query for modification”
+
+}
+
+@enduml
+</code></pre>
+<p>Quality: <em>Functionality</em></p>
+<p>{.feedback</p>
+<ul>
+<li>This is a <em>Functionality</em> use case.</li>
+</ul>
+<p>}</p>
+<p>Scenario: System stores the browsing details of the user as preferences within the columns category_id and shop_name in the database.</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle “Storage of browsing details” {
+
+rectangle “User” as Source
+rectangle “Save under required category in database” as Measure
+
+
+Source -&gt; [System] : “Browses through the application”
+
+[System] -&gt; [Measure] : “Sends alert to sync the user’s history”
+
+}
+
+@enduml
+</code></pre>
+<p>Quality: <em>Usability</em></p>
+<p>Scenario: If a new user faces issues in operating the application, the system suggests the help button to them, and operation afterwards going through the help shouldn't take more than 3 minutes.</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle “During Runtime” {
+
+rectangle “User” as Source
+rectangle “Operation of app afterwards takes less than 3 mins” as Measure
+
+
+Source -&gt; [System] : “Is new to system and faces problems in operation”
+
+[System] -&gt; [Measure] : “ suggests help button”
+
+}
+
+@enduml
+</code></pre>
+<p>Quality: <em>Interoperability</em></p>
+<p>{.feedback</p>
+<ul>
+<li>Could also be classified as <em>Modularity</em>, <em>Reusability</em> or <em>Composability</em></li>
+</ul>
+<p>}</p>
+<p>Scenario : The user selects the directions button for a particular shop, the app should be able to correctly map the location to the place selected by the user and display it on google maps.</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle “On selection of a particular location” {
+
+rectangle “User” as Source
+rectangle “Display on Google Maps” as Measure
+
+
+Source -&gt; [System] : “Selects the direction button for a shop”
+
+[System] -&gt; [Measure] : “Location is correctly mapped to the shop”
+
+}
+
+@enduml
+</code></pre>
+<p>Quality: <em>Security</em></p>
+<p>Scenario: Have the connected authentication api be called at the time of login into the application by the user.</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle “At time of Login” {
+
+rectangle “User” as Source
+rectangle “Prompt Google authentication” as Measure
+
+
+Source -&gt; [System] : “email and password are inputted by user”
+
+[System] -&gt; [Measure] : “ Details are processed”
+
+}
+
+@enduml
+</code></pre>
+<p>Quality: <em>Changeability</em></p>
+<p>Scenario: Addition of a new payment processing method for the in app purchases.</p>
+<pre><code class="language-puml">@startuml
+
+skinparam componentStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle “Under Normal Conditions” {
+
+rectangle “Developer” as Source
+rectangle “Process takes less than one week” as Measure
+
+
+Source -&gt; [System] : “Change the billing process to accommodate new credit card provider”
+
+[System] -&gt; [Measure] : “Change in code base ”
+
+}
+
+@enduml
+</code></pre>
+<h1 id="ex-quality-attribute-tradeoff">Ex - Quality Attribute Tradeoff</h1>
+<p>{.instructions</p>
+<p>Pick a free combination of two qualities on the <a href="https://usi365.sharepoint.com/:x:/s/MSDE-2022-SoftwareArchitecture/ESVksoXVgMNHtKBKrIwatMYBqorOFaKjxnoqssEy0gNPCg?e=81W7SI">map</a> and write your name to claim it.</p>
+<p>Then write a short text giving an example for the tradeoff in this assignment.</p>
+<p>Pass: 1 unique trade-off</p>
+<p>Good: 2 trade-offs</p>
+<p>Exceed: &gt;2 trade-offs</p>
+<p>}</p>
+<h2 id="portability-vs-performance-example">Portability vs. Performance (Example)</h2>
+<p>Developing an app natively for each OS is expensive and time consuming, but it benefits from a good performance. Choosing a cross-platform environment on the other hand simplify the development process, making it faster and cheaper, but it might suffer in performance.</p>
+<h1 id="trade-offs">Trade-offs</h1>
+<h2 id="extensibility-and-design-consistency">Extensibility and Design Consistency</h2>
+<p>In order to keep the operations simplified and easier to identify for the users, a same design pattern needs to be maintained, across all the different screens of the application - so that users do not get confused when trying out different alternatives in the app. Keeping design consistent does hold up customer’s expectations but for future prospects, growing the architecture further will put a lot of constraints on the development of the app and more time and effort in implementation.</p>
+<h2 id="customizability-and-composability">Customizability and Composability</h2>
+<p>Creating a lot of customizations for the users in the application will make the app more useful and assist them in more advanced levels, but it would require many sub components and interconnections within the app which would lead to utilization of  a lot of resources and increment of development costs.</p>
+<h2 id="adaptability-and-performance">Adaptability and Performance</h2>
+<p>As an application that works as a guidebook for the users, one of the prime advantages is that it can be highly adaptable to the user’s preferences, interests, and new trends in the market, but as the complexity increases, it will overload the development process, leading to possible reductions in performance.</p>
+<p>{.feedback</p>
+<p>Which kind of performance are you referring to? the one of the overloaded developers? or the one of the resulting adaptable system?</p>
+<p>}</p>
+<h1 id="ex-feature-modeling">Ex - Feature Modeling</h1>
+<p>{.instructions</p>
+<p>In the context of your chosen project domain, describe your domain using a feature model.</p>
+<p>The feature model should be correctly visualized using the following template:</p>
+<p><img alt="Example Feature Model Diagram" src="examples/feature.puml" /></p>
+<p><img alt="Example Feature Model Diagram" src="examples/feature.fml" /></p>
+<p>If possible, make use of all modeling constructs.</p>
+<p>Pass: Include at least 4 non-trivial features</p>
+<p>Good: Include at least 6 non-trivial features, which are all implemented by your project</p>
+<p>Exceed: Include more than 8 non-trivial features, indicate which are found in your project and which belong to one competitor</p>
+<p>}</p>
+<pre><code class="language-puml">@startuml
+rectangle &quot;Personalize (app)&quot; as A
+rectangle &quot;Sync preferences&quot; as B 
+rectangle &quot;Wishlist” as C 
+rectangle “Connect with Social media” as Z
+
+A *-- B
+A *-- C
+A *-- Z
+
+rectangle &quot;Browse&quot; as H
+rectangle “Search” as DQ
+rectangle &quot;Select Category&quot; as DQA
+
+ DQ -- DQA
+rectangle “Filtering” as E
+rectangle “Distance” as EA
+rectangle “Price” as ED
+rectangle “Ratings” as EB
+rectangle “Most Popular” as EC
+rectangle &quot;Services&quot; as ET 
+rectangle &quot;Incentives&quot; as EW 
+
+
+E *-- EA
+E *-- ED
+E *-- EB
+E *-- EC
+E *-- ET
+E *-- EW
+rectangle “Additional Info” as F
+
+H *-- DQ
+H *-- E
+H *-- F
+
+rectangle &quot;GPS&quot; as Q 
+  note left
+  Implemented by &lt;&amp;map-marker&gt;
+end note
+rectangle &quot;Security&quot; as K
+rectangle &quot;Google Authentication&quot; as Y
+rectangle &quot;OTP&quot; as U
+
+K o--Y
+K o--U
+
+rectangle “Mode&quot; as M 
+rectangle “Traveler” as T 
+rectangle “Settler” as S 
+
+M o--T
+M o--S
+
+rectangle &quot;Reviews&quot; as N
+rectangle “Purchases” as P
+rectangle “ View” as J 
+rectangle “ Avail Offers” as W 
+rectangle “Subscriptions” as D
+
+P *-- J
+P *-- W
+P *-- D
+
+rectangle “Transport Services” as L 
+rectangle “Bus” as FD
+rectangle “Train” as DW
+rectangle “Bicycle” as DE
+L *-- FD
+L *-- DW
+L *-- DE
+
+rectangle “Bookings” as X
+rectangle “Hotels” as  XA
+rectangle “Tours” as XB
+rectangle “Restaurants” as XC
+
+X *-- XA
+X *-- XB
+X *-- XC
+
+DQ-[dotted]&gt; E : require
+W -[dotted]&gt; B : require
+
+rectangle &quot;Local Guide&quot;  as R 
+
+R --@ A
+R --@ H 
+R --@ Q 
+R --@ K
+R --@ N 
+R --0 L
+R --0 X
+R --0 P
+R --0 M
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<h1 id="ex-context-diagram">Ex - Context Diagram</h1>
+<p>{.instructions</p>
+<p>Prepare a context diagram to define the design boundary for your project.</p>
+<p>Here is a PlantUML/C4 example to get started.</p>
+<p><img alt="Example Context Diagram" src="examples/context.puml" /></p>
+<p>Make sure to include all possible user personas and external dependencies you may need.</p>
+<p>Pass: 1 User and 1 Dependency</p>
+<p>Good: &gt;1 User and &gt;1 Dependency</p>
+<p>Exceed: &gt;1 User and &gt;1 Dependency, with both incoming and outgoing dependencies</p>
+<p>}</p>
+<pre><code class="language-puml">@startuml
+!include &lt;C4/C4_Container&gt;
+
+Person(user_s, &quot;User&quot;, &quot;&quot;)
+Person(user_p, &quot;Shop owners&quot;, &quot;&quot;)
+Person(user_d, &quot;Developers&quot;, &quot;&quot;)
+
+System_Boundary(boundary, &quot;Realm DB&quot;) {
+
+}
+
+System_Ext(application, “application&quot;)
+System_Ext(API, &quot;API&quot;)
+
+Rel(user_s, boundary, Browses through the application)
+Rel(user_p, boundary, Provides all relevant information)
+Rel(user_d, boundary, Updates information for different categories )
+
+Rel(boundary, application,Sync Changes ,Information)
+Rel(boundary,API,Location and external browser usage,content)
+@enduml
+</code></pre>
+<h1 id="ex-component-model-top-down">Ex - Component Model: Top-Down</h1>
+<p>{.instructions</p>
+<p>Within the context of your project domain, represent a model of your modular software architecture decomposed into components.</p>
+<p>The number of components in your logical view should be between 6 and 9:</p>
+<ul>
+<li>At least one component should be further decomposed into sub components</li>
+<li>At least one component should already exist. You should plan how to reuse it, by locating it in some software repository and including in your model the exact link to its specification and its price.</li>
+<li>At least one component should be stateful.</li>
+</ul>
+<p>The logical view should represent provide/require dependencies that are consistent with the interactions represented in the process view.</p>
+<p>The process view should illustrate how the proposed decomposition is used to satisfy the main use case given by your domain model.</p>
+<p>You can add additional process views showing how other use cases can be satisfied by the same set of components.</p>
+<p>This assignment will focus on modularity-related decisions, we will worry about deployment and the container view later.</p>
+<p>Here is a PlantUML example logical view and process view.</p>
+<pre><code class="language-puml">@startuml
+title Example Process View
+
+participant &quot;User Interface&quot; as UI
+participant &quot;Music Player&quot; as MP
+participant &quot;Songs Repository&quot; as SR
+participant &quot;Customer Database&quot; as CDB
+participant &quot;Payment Service&quot; as PS
+
+UI -&gt; SR: Browse Songs
+UI -&gt; CDB: Buy Song
+CDB -&gt; PS: Charge Customer
+UI -&gt; MP: Play Song
+MP -&gt; SR: Get Music
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Hint: How to connect sub-components to other external components? Use this pattern.</p>
+<pre><code class="language-puml">@startuml
+component C {
+   component S
+   component S2
+   S -(0- S2
+}
+interface I
+S - I
+
+component C2
+I )- C2
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Pass: 6 components (1 decomposed), 1 use case/process view</p>
+<p>Good: 6 components (1 decomposed), 2 use case/process view</p>
+<p>Exceed: &gt;6 components (&gt;1 decomposed) and &gt;2 use case/process view</p>
+<p>}</p>
+<h2 id="logical-view">Logical View</h2>
+<pre><code class="language-puml">@startuml
+!include &lt;tupadr3/font-awesome/database&gt;
+
+component UserInterface {
+component Services {
+      component Transport
+      component Bookings
+      component Mode
+      Mode -(0- Transport
+      Transport -(0- Bookings
+
+}
+component Browsing{
+     component Search
+     component Filtering
+     component Info
+     component Location
+     Search -(0-Filtering
+     Filtering -(0-Info
+     Info -(0- Location
+ }
+ component Personalize{
+   component Preferences
+   component Subscriptions
+ }
+}
+
+component [RealmDatabase &lt;$database{scale=0.33}&gt;] as RealmDatabase
+component ExternalAPI
+component PaymentGateway
+component Security
+
+UserInterface -(0- RealmDatabase
+UserInterface -(0- ExternalAPI
+UserInterface -(0- Security
+UserInterface -(0- PaymentGateway
+RealmDatabase -(0- ExternalAPI
+RealmDatabase -(0- PaymentGateway
+Security -(0- RealmDatabase
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>{.feedback</p>
+<p>What is the role of the Browsing component? Why is it different than the UI?</p>
+<p>Why are the sub-components chained together?</p>
+<p>Why are Services connected with dependencies when there are no interactions with them in any process view?</p>
+<p>Also PaymentGateway is never used in any process view.</p>
+<p>Why the API doesn't connect to the database? Is it the Google Maps API? or the API of your architecture?</p>
+<p>}</p>
+<h2 id="process-views">Process Views</h2>
+<p>Use case 1 : User operates the application</p>
+<pre><code class="language-puml">@startuml
+title User and browsing interaction
+
+box &quot;User Interface&quot;
+participant &quot;User Interface&quot; as UI
+participant Search as SH
+participant Filtering as FG
+participant Info as IN
+Participant Location as LO
+participant &quot;Services&quot; as LN
+  end box
+participant &quot;Security&quot; as MP
+participant &quot;Payment Gateway&quot; as PS
+participant &quot;API&quot; as AP
+database RealmDB #grey
+
+UI -&gt; MP: User logins into app
+RealmDB --&gt; UI :  User authenticated
+UI -&gt; UI : User opens the browsing screen
+UI -&gt; SH : User searches for desired category
+SH --&gt; UI: Search displays sub categories for one selected category
+UI -&gt; SH: User selects the filtering option of user reviews
+SH -&gt; FG : Search calls the filtering to display available filters
+FG --&gt; UI : Display filters to user
+UI-&gt; FG : User selects reviews
+FG -&gt; RealmDB : Fetches the reviews from the database
+RealmDB --&gt; FG: Reviews are fetched back as response to filtering request
+FG --&gt; UI: The reviews are displayed
+UI -&gt; IN: The user clicks on additional link button
+IN -&gt; AP: The links are opened in the browser using relevant API
+AP --&gt; UI: Results are displayed to the user
+UI -&gt; LO: Directions button is clicked
+LO -&gt; RealmDB: Sends requests for coordinates
+RealmDB --&gt; LO : Coordinates retrieved
+LO -&gt; AP : Request Google Maps from API
+LO -&gt; UI: Display Location
+
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Use Case 2 : User makes a purchase within the application</p>
+<pre><code class="language-puml">@startuml
+title User purchases tickets for a tour
+
+box &quot;User Interface&quot;
+participant &quot;User Interface&quot; as UI
+participant Search as SH
+participant Filtering as FG
+participant Info as IN
+Participant Location as LO
+participant &quot;Services&quot; as LN
+  end box
+participant &quot;Security&quot; as MP
+participant &quot;Payment Gateway&quot; as PS
+participant &quot;API&quot; as AP
+database RealmDB #grey
+
+UI -&gt; MP: User logins into app
+RealmDB --&gt; UI :  User authenticated
+UI -&gt; UI : User opens the browsing screen
+UI -&gt; SH : User searches for transportation
+SH --&gt; UI: Search displays sub categories for transportation
+UI -&gt; SH: User selects the filtering option of price
+SH -&gt; FG : Search calls the filtering to display options
+FG -&gt; RealmDB : Requests the results from the database
+RealmDB --&gt; FG: Results are fetched back as response to filtering request
+FG --&gt; UI: The transport options with filter price are displayed
+UI -&gt; LN : User clicks on buy daily pass under sub category bus
+LN -&gt; AP: Requests the link for payment processing
+AP -&gt; PS: Connects with the gateway
+PS -&gt; UI : Payment page displayed for user details
+UI -&gt; UI : Transaction made
+PS -&gt; RealmDB : Transaction details are saved
+PS --&gt;UI : Confirmation message displayed
+
+
+
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Use Case 3 : Subscription process in the application</p>
+<pre><code class="language-puml">@startuml
+title Subscription Process
+
+participant &quot;User Interface&quot; as UI
+participant &quot;Security&quot; as MP
+participant &quot;Browsing&quot; as SR
+participant &quot;Services&quot; as LN
+participant &quot;Payment Gateway&quot; as PS
+participant &quot;API&quot; as AP
+database RealmDB #grey
+
+UI -&gt; MP: User logins into app
+RealmDB --&gt; UI :  User authenticated
+UI -&gt; SR: Sync preferences enabled
+SR -&gt; RealmDB : Wishlist saved in database
+RealmDB --&gt; SR: Save successful
+SR -&gt; AP: Notifies shop owner 
+AP -&gt; UI : Alert generation activated for new offers
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Use case 4 : Selection of App Mode (Traveller/Settler) by the User</p>
+<pre><code class="language-puml">@startuml
+title Selection of App mode by User
+
+participant &quot;User Interface&quot; as UI
+participant &quot;Security&quot; as MP
+participant &quot;Browsing&quot; as SR
+participant &quot;Services&quot; as LN
+participant &quot;Payment Gateway&quot; as PS
+participant &quot;API&quot; as AP
+database RealmDB #grey
+
+UI -&gt; MP: User logins into app
+RealmDB --&gt; UI :  User authenticated
+UI -&gt;LN : User selects traveller mode
+LN -&gt; RealmDB : User request sent to DB
+RealmDB -&gt; RealmDB : Adds userId to relevant column in DB
+RealmDB -&gt; RealmDB : Save column information
+RealmDB -&gt; UI: Display the relevant screens for user
+
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<h1 id="ex-component-model-bottom-up">Ex - Component Model: Bottom-Up</h1>
+<p>{.instructions</p>
+<p>Within the context of your project domain, represent a model of your modular software architecture decomposed into components.</p>
+<p>To design this model you should attempt to buy and reuse as many components as possible.</p>
+<p>In addition to the logical and process views, you should give a precise list to all sources and prices of the components you have selected to be reused.</p>
+<p>Write an ADR to document your component selection process (indicating which alternatives were considered).</p>
+<p>Pass: Existing design with at least 1 reused components (1 Logical View, 1 Process View)</p>
+<p>Good: Existing design with at least 3 reused components (1 Logical View, 1 Process View, 1 ADR)</p>
+<p>Exceed: Redesign based on &gt;3 reused components (1 Logical View, &gt;1 Process View, &gt;1 ADR)</p>
+<p>}</p>
+<h2 id="logical-view_1">Logical View</h2>
+<pre><code class="language-puml">@startuml
+!include &lt;tupadr3/font-awesome/database&gt;
+note top of UserInterface
+   Instead of being coded from scratch, 
+   Google's Material design UI kit will be 
+    used, which already has code available 
+    to design all the needed components.
+end note
+component UserInterface {
+component Services {
+      component Transport
+      component Bookings
+      component Mode
+
+}
+component Browsing{
+     component Search
+     component Filtering
+     component Info
+     component Location
+ }
+ component Personalize{
+   component Login
+   component Preferences
+   component Subscriptions
+ }
+}
+
+component [Firebase &lt;$database{scale=0.33}&gt;] as Firebase
+component ExternalAPI
+component PaymentGateway
+note bottom of PaymentGateway
+   uses built-in system Stripe
+end note
+
+
+UserInterface -(0- Firebase
+UserInterface -(0- ExternalAPI
+UserInterface -(0- PaymentGateway
+Firebase -0)- ExternalAPI
+Firebase -0)- PaymentGateway
+
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Price and specification of components</p>
+<p>Material Design UI toolkit for component User Interface</p>
+<p>Price: free</p>
+<p>Specs: https://material.io/components?platform=android</p>
+<p>Firebase for stateful component Database</p>
+<p>Price: free at start but gradually increases if application is scaled up</p>
+<p>Specs : 
+* https://firebase.google.com/docs/android/setup
+* https://firebase.google.com/docs/database/android/start
+* https://firebase.google.com/</p>
+<p>Payment Gateway : Stripe</p>
+<p>https://github.com/firebase/functions-samples/tree/main/stripe</p>
+<h2 id="process-views_1">Process Views</h2>
+<p>Use case : User operating the application with all of its functionalities </p>
+<pre><code class="language-puml">@startuml
+title User operates all functions 
+
+box &quot;User Interface&quot;
+actor user #red
+participant Login as LG
+participant Search as SH
+ participant Filtering as FG
+ participant Info as IN
+ participant Location as LO
+participant &quot;Subscriptions&quot; as SN
+participant &quot;Preferences&quot; as PN
+participant &quot;Transport&quot; as TP
+participant &quot;Bookings&quot; as BP
+participant &quot;Mode&quot; as MD
+  end box
+
+participant &quot;Payment Gateway&quot; as PS
+participant &quot;ExternalAPI&quot; as AP
+database Firebase #grey
+
+user -&gt; LG: User inputs authentication credentials
+LG -&gt; Firebase: Begin Authentication
+Firebase -&gt; Firebase : Pass credentials to Firebase Authentication SDK
+Firebase -&gt;Firebase : Backend verifies credentials
+Firebase-&gt;LG : User successfully authenticated
+LG -&gt; LG : Display welcome message
+user -&gt; MD: Selects traveller mode
+MD -&gt; Firebase : Request send to database
+Firebase -&gt; Firebase: Add user mode to relevant column in db
+Firebase -&gt; Firebase: Save column information
+Firebase -&gt; user: Display relevant screens to user
+
+user -&gt; SH :User browses through category
+user -&gt; IN: User clicks on additional info
+IN -&gt; AP: The links are opened in the browser using relevant API
+AP -&gt; user: Results are displayed to user
+user -&gt; LO: Directions button is clicked
+LO -&gt;Firebase: Sends requests for coordinates
+Firebase --&gt; LO : Coordinates retrieved
+LO -&gt; AP : Request Maps API
+AP -&gt; user: Display Location
+user -&gt; SH : User selects transportation
+SH -&gt; SH : Return sub categories
+user -&gt; SH : user clicks on bus, adds filter offers for tickets
+SH -&gt;FG : Filtering called to display results
+FG -&gt; user : Display ticket offers
+user -&gt; TP : Selects offer, request for valid route
+TP -&gt; user: Display applicable routes
+user -&gt; BP : User clicks on buy ticket
+BP -&gt; PS : Transaction initiated for user 
+PS -&gt; Firebase: Details stored under relevant user id
+PS -&gt; user: Transaction succesful
+user -&gt; PN: Sync preferences enabled
+PN -&gt; Firebase : Wishlist saved in database
+Firebase --&gt; PN: Save successful
+Firebase -&gt; Firebase : notifies shop owner through firebase cloud messaging 
+Firebase -&gt; user : Alert generation activated for new offers
+user -&gt; SN : browses through monthly subscription offers
+user -&gt; SN: Selects subscription for a shop
+SN -&gt; PS : Payment process started
+PS -&gt; Firebase : Details stored under subscriptionid
+PS -&gt; user: Subscribed successfully 
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Use case 2 : User creating check-in request in Bookings component</p>
+<pre><code class="language-puml">@startuml
+
+box &quot;User Interface&quot;
+actor user #red
+participant Login as LG
+participant Search as SH
+ participant Filtering as FG
+ participant Info as IN
+ participant Location as LO
+participant &quot;Subscriptions&quot; as SN
+participant &quot;Preferences&quot; as PN
+participant &quot;Transport&quot; as TP
+participant &quot;Bookings&quot; as BP
+participant &quot;Mode&quot; as MD
+  end box
+
+participant &quot;Payment Gateway&quot; as PS
+participant &quot;ExternalAPI&quot; as AP
+database Firebase #grey
+
+user -&gt; LG : User logins into app
+Firebase -&gt; user : User authenticated
+user -&gt; BP : Create a reservation
+BP -&gt; BP : Filter reservations
+BP -&gt; BP: Create check-in request
+BP -&gt; AP: Webhook for check-in request
+AP -&gt; BP: Fetch check-in request
+AP -&gt; AP: Check if check-in is possible
+AP -&gt; BP : Move to Data_required
+BP -&gt; user : Send email asking for details
+rnote over user
+  End of flow 
+  if user never responds
+end rnote
+user -&gt; BP : Fills out check-in form
+BP -&gt; BP: Change check-in status to requested
+BP -&gt; AP : Webhook for check-in request
+AP -&gt; BP: Fetch check-in request
+AP -&gt; AP : Checks if information provided is valid, completes pre check-in
+AP -&gt; BP: Send room access info and change check-in to Success or Denied.
+rnote over AP
+  Room access info may 
+  include QR codes, door codes,
+  directions to the place etc.
+end rnote
+
+BP -&gt; user : Send email with confirmation or denial
+rnote over user
+  Follow instructions
+  to get access to room
+end rnote
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<h2 id="adr-1-selection-of-ui-toolkit">ADR 1 : Selection of UI toolkit</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>UI Toolkit : Material Design</p>
+<ol>
+<li>What was the context for your decision?</li>
+</ol>
+<p>The aim of this decision is to find the most optimal solution so that the development time for the user interface can be reduced considerably</p>
+<p>What is the goal you are trying to achieve?</p>
+<p>Design an interface that is appealing to the users and consumes less work hours.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision only impacts the look and feel of the mobile app</p>
+<ol>
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can a developer create the most user friendly app with minimal effort and less code?</p>
+<ol>
+<li>
+<p>Which alternative options did you consider?</p>
+</li>
+<li>
+<p>Material Design</p>
+</li>
+<li>
+<p>Jetpack compose</p>
+</li>
+<li>
+<p>Which one did you choose?</p>
+</li>
+</ol>
+<p>Material Design</p>
+<ol>
+<li>What is the main reason for that?</li>
+</ol>
+<p>It comprises all the features that will be implemented for the application, and as the app caters to the tourism industry, it needs to have an aesthetic appeal, and that particular purpose is fulfilled by Material’s pre-written code for different types of UI components.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Reduction of code, which would otherwise increase the workload if hardcoded in java</li>
+<li>As it is developed by Google, makes it more easier to integrate with api’s efficiently </li>
+</ul>
+<h2 id="adr-2-selection-of-a-different-database">ADR 2 : Selection of a different database</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Firebase</p>
+<ol>
+<li>What was the context for your decision?</li>
+</ol>
+<p>The goal of this decision was to find another database which offers all the features as the previously selected one (Realm Database), and offers a method to integrate the Security component of the app within the database itself.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>As the database is the main component dealing with storage and querying, this decision impacts the entire structure of the application</p>
+<ol>
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can the selection of the database be maneuvered in such a way that it handles the security component and effortless integration with Google APIs? </p>
+<ol>
+<li>
+<p>Which alternative options did you consider?</p>
+</li>
+<li>
+<p>Firebase</p>
+</li>
+<li>Cloud Firestore</li>
+<li>
+<p>Elasticsearch</p>
+</li>
+<li>
+<p>Which one did you choose?</p>
+</li>
+</ol>
+<p>Firebase</p>
+<ol>
+<li>What is the main reason for that?</li>
+</ol>
+<p>The main purpose that will be served by firebase is integration of the security component within itself, and also as the developer has already experience with this technology, it will be less time consuming as compared to the previous decisions of Realm Database, which required everything to be learned from scratch.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>As a Google Cloud service, it also gives you access to other Google products and features, in this case the UI toolkit and api</li>
+<li>When the app is linked with Firebase, there is no need for creation of a separate login interface, as its built-in login UI can be utilized to sign users into the app</li>
+</ul>
+<h1 id="ex-interfaceapi-specification">Ex - Interface/API Specification</h1>
+<p>{.instructions</p>
+<p>In this iteration, we will detail your previous model to specify the provided interface of all components based on their interactions found in your existing process views.</p>
+<ol>
+<li>
+<p>choose whether to use the top down or bottom up model. If you specify the interfaces of the bottom up model, your interface descriptions should match what the components you reuse already offer.</p>
+</li>
+<li>
+<p>decide which interface elements are operations, properties, or events.</p>
+</li>
+</ol>
+<p>Get started with one of these PlantUML templates, or you can come up with your own notation to describe the interfaces, as long as it includes all the necessary details.</p>
+<p>The first template describes separately the provided/required interfaces of each component. </p>
+<p><img alt="Separate Required/Provided Interfaces" src="examples/interface1.puml" /></p>
+<p>The second template annotates the logical view with the interface descriptions: less redundant, but needs the logical dependencies to be modeled to show which are the required interfaces.</p>
+<p><img alt="Shared Interfaces" src="examples/interface2.puml" /></p>
+<p>Pass: define interfaces of all outer-level components</p>
+<p>Good: Define interfaces of all outer-level components. Does your architecture publish a Web API? If not, extend it so that it does. </p>
+<p>Exceed: Also, document the Web API using the OpenAPI language. You can use the <a href="http://api-ace.inf.usi.ch/openapi-to-tree/">OpenAPI-to-Tree</a> tool to visualize the structure of your OpenAPI description.</p>
+<p>}</p>
+<h2 id="api-specification">API Specification:</h2>
+<pre><code class="language-puml">@startuml
+
+component UserInterface
+
+component RESTAPI
+interface &quot; &quot; as iRESTAPI
+
+component Firebase
+interface &quot; &quot; as iFirebase
+
+component Stripe
+interface &quot; &quot; as iStripe
+
+component LocalGuideDB
+interface &quot; &quot; as iLocalGuideDB
+
+component WebAPI
+
+UserInterface --( iRESTAPI
+UserInterface --( iFirebase
+iRESTAPI - RESTAPI
+RESTAPI--( iFirebase
+WebAPI --( iRESTAPI
+iFirebase - Firebase
+Stripe--( iFirebase
+iStripe- Stripe
+LocalGuideDB --( iFirebase
+
+UserInterface -( iLocalGuideDB
+iLocalGuideDB - LocalGuideDB
+UserInterface --( iStripe
+
+
+note bottom of iRESTAPI
+operations:
+..
+getcategories(string)
+getsubcategories
+getFilters
+getUserPreference(subscription_id,shop_id,offer_id)
+getLocation
+getTransactionLink
+getExternalURL
+end note
+
+
+note bottom of iFirebase
+operations:
+..
+storeStripeKey
+getData
+updateData
+saveData
+deleteData
+--
+properties:
+..
+category
+filter
+usercredentials
+mode
+transport
+subscriptions
+
+end note
+
+
+note top of iStripe
+operations:
+..
+createCustomer
+createCheckoutSession
+createPortalLink
+handleWebhookEvents
+onUserDeleted
+onCustomerDataDeleted
+setPaymentMethod
+setInvoiceSettings
+--
+events:
+..
+product.updated
+product.deleted
+price.created
+price.updated
+price.deleted
+checkout.session.completed
+customer.subscription.created
+customer.subscription.updated
+customer.subscription.deleted
+invoice.paid
+invoice.payment_succeeded
+invoice.payment_failed
+invoice.upcoming
+invoice.payment_action_required
+end note
+
+note right of iLocalGuideDB
+operations:
+..
+createUserSignIn
+setAuthenticationproviders
+writeUserdata( userID, name,email)
+storecategories(string)
+storesubcategories
+storeFilters
+storeLocation
+storeExternalURL
+getGoogleMapsAPI
+getGooglePlacesAPI
+getBookingsAPI
+storeUserCredentials
+storeTransactionDetails
+storeUserPreferences
+storeUserSubscriptions
+end note
+
+skinparam monochrome true
+skinparam shadowing false
+@enduml
+</code></pre>
+<p>Local Guide component refers to the database created inside the Firebase console.</p>
+<h2 id="open-api-description">Open API Description</h2>
+<p><img alt="Local guide Open API Description" src="examples/api.png" /> </p>
+<h1 id="ex-connector-view">Ex - Connector View</h1>
+<p>{.instructions</p>
+<p>Extend your existing models introducing the connector view</p>
+<p><img alt="Example Connector View Diagram" src="examples/connector-view.c5" /></p>
+<p>For every pair of connected components (logical view), pick the most suitable connector. Existing components can play the role of connector, or new connectors may need to be introduced.</p>
+<p>Make sure that the interactions shown in the process views reflect the primitives of the selected connector</p>
+<p>Pass: model existing connectors based on previous model decisions</p>
+<p>Good: model existing connectors based on previous model decisions, write an ADR about the choice of one connector</p>
+<p>Exceed: introduce a new type of connector and update your existing process view 
+(sequence diagram) to show the connector primitives in action</p>
+<p>}</p>
+<p>{.feedback</p>
+<p>When describing the interaction with a connector in the process view, please use the primitives of the specific type of connector you have introduced.</p>
+<p>For example the LG tuple space should interact with in/out/read instead of <code>retrieve sub category</code>, <code>send request for coordinates</code>.</p>
+<p>It is unusual for connectors to directly connect between themselves without any intermediate component.</p>
+<p>The process view indicates a direct interaction between Stripe and the Local Guide (details stored under relevant user id) which is not modeled in the connector view</p>
+<p>In general the process view should be modeled using a more technical language to describe the content of the messages as opposed to natural language. This would make it much easier to map the connector primitives to the represented interactions between component/connectors.</p>
+<p>The ADR do not discuss the choice of connector, but as in the previous assignment they explain why one API was selected out of many alternative ones. This is outside the scope of the current assignment. We expected here to consider options such as: call, message queue, shared database, tuple space.</p>
+<p>}</p>
+<p><img alt="Connector View Diagram" src="examples/localguideconnector.c5" /></p>
+<p>New Connectors
+1. ConnectAPI which stands for Stripe Connect, which is essentially a platform that enables specific users of the app, targetted towards shop owners and online marketplaces which will enable them to get paid via stripe. On top of that it offers owners the functionality of tools such as CRM analytics.</p>
+<ol>
+<li>Transport API is the local Swiss Public Transport API, which covers public transport within Switzerland. The API uses a web service provided by search.ch. It has resources for locations, connections, station board etc.</li>
+</ol>
+<p>Specs: </p>
+<p>https://transport.opendata.ch/docs.html</p>
+<p>https://timetable.search.ch/api/help</p>
+<p>Existing Connectors</p>
+<ol>
+<li>REST API is the Firebase REST API, which will be used for all the calls between the components.</li>
+</ol>
+<h3 id="process-views_2">Process Views</h3>
+<p>Use case 1: Operation using the Transport API</p>
+<pre><code class="language-puml">@startuml
+title Basic functionality of app
+box &quot;User Interface&quot;
+actor user #red
+participant Login as LG
+participant Search as SH
+ participant Filtering as FG
+ participant Info as IN
+ participant Location as LO
+participant &quot;Subscriptions&quot; as SN
+participant &quot;Preferences&quot; as PN
+participant &quot;Bookings&quot; as BP
+participant &quot;Transport&quot; as TP
+participant &quot;Mode&quot; as MD
+  end box
+entity TransportAPI as TAP
+entity ConnectAPI as SC
+entity StripeAPI AS SP
+participant &quot;Stripe&quot; as PS
+entity RESTAPI as AP
+database Firebase #grey
+
+user -&gt; LG: User inputs authentication credentials
+LG -&gt; Firebase: Begin Authentication
+Firebase-&gt;LG : User successfully authenticated
+user -&gt; SH :User browses through categories
+user-&gt; SH: User clicks on Grocery
+SH-&gt;Firebase: GET sub category Supermarket
+Firebase-&gt; user: Display sub category
+user -&gt; IN: User clicks on additional info
+IN -&gt; AP: GET https://example.com/summer-sale
+AP --&gt; user: Display link
+user -&gt; LO: Directions button is clicked
+LO -&gt;Firebase: POST coordinate_request
+Firebase -&gt; Firebase : GET coordinates
+Firebase -&gt; AP : GET Maps API
+AP --&gt;user : Display location
+user -&gt; SH : User selects transportation
+SH -&gt; SH : Return sub categories
+user -&gt; TP : User clicks on train
+TP-&gt;FG : Filtering called to display results
+FG-&gt;user: Relevant results displayed
+user-&gt;TP: User clicks on locations
+TP-&gt;TAP:  GET http://transport.opendata.ch/v1/locations
+TAP--&gt;user: Return /v1/locations
+TP-&gt;TAP: GET http://transport.opendata.ch/v1/connections?from=Lausanne&amp;to=Genève
+TAP--&gt;user: Return /v1 /connections
+user-&gt;TP: User clicks station board
+TP-&gt;TAP: GET http://transport.opendata.ch/v1/stationboard
+TAP--&gt;user: Return /v1/stationboard
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<p>Use case 2: Operation using Stripe Connect API</p>
+<pre><code class="language-puml">@startuml
+title Operation of Stripe Connect
+box &quot;User Interface&quot;
+actor user #red
+participant Login as LG
+participant Search as SH
+ participant Filtering as FG
+ participant Info as IN
+ participant Location as LO
+participant &quot;Subscriptions&quot; as SN
+participant &quot;Preferences&quot; as PN
+participant &quot;Bookings&quot; as BP
+participant &quot;Transport&quot; as TP
+participant &quot;Mode&quot; as MD
+  end box
+entity TransportAPI as TAP
+entity ConnectAPI as SC
+entity StripeAPI AS SP
+participant &quot;Stripe&quot; as PS
+entity RESTAPI as AP
+database Firebase #grey
+
+user -&gt; LG: Shop owner inputs auth credentials
+LG -&gt; Firebase: Begin Authentication
+Firebase -&gt; Firebase : Pass credentials to FirebaseAuth
+Firebase -&gt;Firebase : .getCurrentUser
+Firebase--&gt;LG : Owner successfully authenticated
+LG-&gt;user: Display welcome message
+user-&gt;SC: POST /v1/accounts with cardPayments,transfers,type,country,email,company,APIKey 
+SC--&gt;user: Return /v1/accounts
+user-&gt;SC: POST/v1/account_links with account,refresh_url,return_url,type=account_onboarding,collect 
+SC--&gt;user: Return &quot;https://connect.stripe.com/setup/s/h0Pj5SzjFTqm&quot;
+user-&gt;SC:  POST /v1/payment_intents with attributes id,amount,automatic_payment_methods,charges,client_secrent,currency,customer,description,last_payment_error,payment_method,status
+SC-&gt;user: Return /v1/payment_intents
+user-&gt;SC: POST /v1/payment_methods with id,billing_details,customer,type,customer_balance,card_present
+SC--&gt;user:Return payment_methods
+user-&gt;SC: POST /v1/customers with id.object,address,create,currency,discount,email.invoice_settings,phone,name,shipping,preferred_locales
+SC--&gt;user: Return /v1/customers
+user-&gt; SC: POST /stripe_webhooks
+SC--&gt;user: Return /stripe_webhooks
+user-&gt;SC: GET /v1/events/:id
+SC--&gt;user: Return events
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Courier
+@enduml
+</code></pre>
+<h3 id="adr-1-selection-of-api-connector">ADR 1: Selection of API connector</h3>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>API as a connector</p>
+<ol>
+<li>What was the context for your decision?</li>
+</ol>
+<p>The goal is to fix the  mismatch for the transport sub component in the UI. </p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>It affects only the user interface of the application, as transport is a sub component in it</p>
+<ol>
+<li>
+<p>Which alternative options did you consider?</p>
+</li>
+<li>
+<p>API connector</p>
+</li>
+<li>A shared database with information on transport</li>
+<li>
+<p>tuple with different transport functionalities mapped inside of it</p>
+</li>
+<li>
+<p>Which one did you choose?</p>
+</li>
+</ol>
+<p>API connector</p>
+<ol>
+<li>What is the main reason for that?</li>
+</ol>
+<p>The main reason for this selection is primarily the mismatch between the transport sub component of the interface,as there were no relevant shared databases as such to get the information, as for now the app is restricted to transportation within switzerland, and no other type of connector is valid for the interaction I wanted to show, so I decided to go ahead with the transport api which provides public transport within Switzerland. The API uses a web service provided by search.ch</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Since the api connector has the information for transport specific to switzerland, it helps to narrow down the work for the developer and eliminates the need to create a new component from scratch.</li>
+<li>Handles the mismatch between the component functionality.</li>
+</ul>
+<h1 id="ex-adapters-and-coupling">Ex - Adapters and Coupling</h1>
+<p>{.instructions</p>
+<ol>
+<li>Highlight the connectors (or components) in your existing bottom-up design playing the role of adapter. (We suggest to use the bottom-up design since when dealing with externally sourced components, their interfaces can be a source of mismatches).</li>
+<li>Which kind of mismatch** are they solving?</li>
+<li>Introduce a wrapper in your architecture to hide one of the previously highlighted adapters</li>
+<li>Where would standard interfaces play a role in your architecture? Which standards could be relevant in your domain?</li>
+<li>Explain how one or more pairs of components are coupled according to different coupling facets</li>
+<li>Provide more details on how each adapter solves the mismatches identified using pseudo-code or the actual code</li>
+<li>How can you improve your architectural model to minimize coupling between components? (Include a revised logical/connector view with your solution)</li>
+</ol>
+<p>Pass: 1-5 (with one adapter)</p>
+<p>Good: 1-6 (with at least two adapters)</p>
+<p>Exceed: 1-7 (with at least two adapters)</p>
+<p>** If you do not find any mismatch in your existing design we suggest to introduce one artificially.</p>
+<h2 id="hints">Hints</h2>
+<ul>
+<li>(1) Should we find cases where two components cannot communicate (and are doing it wrongly) and highlight they would need an adapter?, or cases where we have already a "component playing the role of adapter in the view" and highlight only the adapter?</li>
+</ul>
+<p><em>Both are fine. We assumed that if you draw a dependency (or a connector) the interfaces match, but if you detect that the components that should communicate cannot communicate then of course introduce an adapter to solve the mismatch</em></p>
+<ul>
+<li>
+<p>(2) Please show the details about the two interfaces which do not match (e.g., names of parameters, object structures) so that it becomes clear why an adapter is needed and what the adapter should do to bridge the mismatch</p>
+</li>
+<li>
+<p>(5-6) These questions are about the implications on coupling based on the decisions you documented in the connector view.
+Whenever you have a connector you couple together the components and different connectors will have different forms of coupling</p>
+</li>
+</ul>
+<p>For example, if you use calls everywhere, do you really need them everywhere? is there some pair of components where you could use a message queue instead?</p>
+<p>Regarding the coupling facets mentioned in question 5. You do not have to answer all questions related to "discovery", "session", "binding", "interaction", "timing", "interface" and "platform" (p.441, Coupling Facets). Just the ones that you think are relevant for your design and by answering them you can get ideas on how to do question 6.</p>
+<p>}</p>
+<h3 id="adapter-in-bottom-up-model">Adapter in bottom-up Model</h3>
+<p>The bottom-up model has changed from its previous version as in the Connector view assignment, Transport componenent was removed from being the sub component in the User Interface and now will be an external componennt connected to the interface with the relevant api acting as the adapter. </p>
+<p>The three adapters already functional are:
+* Firebase API 
+* Transport API 
+* Stripe API</p>
+<h3 id="mismatch-solved">Mismatch solved</h3>
+<p>The name of the functions that will be resolved in the mismatch are listed in the code below.</p>
+<ol>
+<li>Firebase API served as the main adapter for coordinating the calls between the user interface and the database.</li>
+</ol>
+<p>The set of functions performed at the user interface side will be something as follows:</p>
+<p>function requestCategories
+function getLocations
+function requestStationDetails
+function requestOptions
+function requestPlaces
+function requestConnections
+function sendQueries
+function sendPaymentRequest
+function getPlacesNearMe</p>
+<p>All of these functions will be a set of inputs given by the user, and the api adapters include the set of functions that help perform the specific response for each of these function sets.</p>
+<ol>
+<li>
+<p>Transport API solves the mismatch of the mobile app having transport functionality within itself(booking transport around swiss),the api directs the user to the trnsprt.ch, through which they can search the conenctions between the desired locations.</p>
+</li>
+<li>
+<p>Using Stripe api as the adapter, it solves the mismatch  by connecting the user interface to external payment gateway Stripe.</p>
+</li>
+</ol>
+<h3 id="wrapper">Wrapper</h3>
+<pre><code class="language-puml">@startuml
+
+interface &quot; &quot; as I
+component FirebaseHelper {
+component FirebaseAPI
+FirebaseAPI - I
+component Firebase
+
+interface Internal as i
+
+Firebase - i
+
+FirebaseAPI --( i
+
+}
+component UserInterface{
+component Services {
+      component Bookings
+      component Mode
+
+}
+component Browsing{
+     component Search
+     component Filtering
+     component Info
+     component Location
+ }
+ component Personalize{
+   component Login
+   component Preferences
+   component Subscriptions
+ }
+}
+
+UserInterface --( I
+component Transport
+component Stripe
+interface &quot; &quot; as I
+
+interface &quot; &quot; as w
+UserInterface --( w
+Transport - w
+
+Stripe --( I
+
+[&lt;&lt;Adapter&gt;&gt; StripeAPI] as AD
+Stripe -AD
+AD - UserInterface
+@enduml
+</code></pre>
+<p>{.feedback</p>
+<p>Please rewire the wrapper to use the following structure:</p>
+<pre><code>@startuml
+interface External as I
+component Wrapper {
+
+component Adapter
+
+Adapter - I
+
+component Incompatible
+interface Internal as i
+
+Incompatible - i
+
+Adapter --( i
+
+}
+@enduml
+</code></pre>
+<p>The Adapter component is missing from your model</p>
+<p>}</p>
+<h3 id="standard-interfaces">Standard Interfaces</h3>
+<p>Considering the standard interfaces required in the tourism domain,almost all of the components of the bottom-up model conform to the most widely used interfaces when designing of such an application. So for example, in the category of platforms- mobile apps are more in demand than websites/web apps, and the widely used databases for such domains include: Firebase, MySQL, SQLite, MongoDB etc. Earlier in the top-up model, unconventional databases (like RealmDB) were being used, but the model that currently stands is refined to set of standards defined.</p>
+<p>{.feedback</p>
+<p>Vague references: "most widely used interfaces", "most acceptable" -&gt; which ones exactly?</p>
+<p>}</p>
+<h3 id="coupling-facets">Coupling Facets</h3>
+<h5 id="platform-independence">Platform Independence</h5>
+<p>The architecture essentially is platform independent, as the database being used for the application is Firebase, which has support for quite a lot of languages: java, swift, kotlin etc. and also for both the platforms: web and android. In the future, if the implementation will have to be shifted to another language, the client side could only notice slight changes in the UI, but the internal functionality will remain the same.</p>
+<h5 id="interaction">Interaction</h5>
+<p>The interaction between user  and the external components cannot be indirect. Considering the first case, the user interface makes use of the firebase rest api which plays the role of an adapter pulling data from firebase and displaying to the end user.</p>
+<h5 id="session">Session</h5>
+<p>The interactions between the user and the app in general, does not depend on the previous selections made by the user, as there is no explicit save of user history, unless user turns on the preferences option in the settings.</p>
+<p>{.feedback</p>
+<p>Reads well</p>
+<p>}</p>
+<h3 id="pseudo-code">Pseudo code</h3>
+<p>{.feedback</p>
+<p>This is too much code with very little explanation. It is not clear at all which type of mismatch is the code solving. First describe the two interfaces, explain why they do not match and then the code can show how the adapter solved the mismatch.</p>
+<p>}</p>
+<p>Adapter Transport API</p>
+<pre><code>GET URL = 'https://timetable.search.ch/api/'
+SET ClientIpAddress
+SET ClientUserAgent
+
+function sendAndParseQuery(query)  \\parses the query from the client side, fetches the result on the timetable.ch link
+  {
+     response = sendQuery(query)
+     if (response =isServerError()) {
+         throw Exception(‘'Server error from timetable.search.ch: '.response-&gt;getStatusCode().' '.response-&gt;getReasonPhrase());
+   }
+   content = response-&gt;getContent();
+   result = json_decode(content);
+
+        if (response-&gt;getStatusCode() == 429) {
+            throw new HttpException(429, 'Rate limit error from timetable.search.ch: '.content);
+        .
+        .
+        .
+
+        return result;
+    }
+function sendQuery(query, url = self::URL)
+    {
+        formRequest = query-&gt;toFormRequest();
+        formRequest-&gt;setField('ip_address', this-&gt;clientIpAddress);
+        formRequest-&gt;setField('user_agent', this-&gt;clientUserAgent);
+
+        return this-&gt;browser-&gt;send(formRequest);
+    }
+function findConnections(ConnectionQuery) \\ performs the response action for user asking for connections between two locations
+    {
+        result = this-&gt;sendAndParseQuery(query);
+        connections = [];
+
+        from = null;
+        to = null;
+        stations = [
+            'from' =&gt; [],
+            'to'   =&gt; [],
+        ];
+    result = [
+            'connections' =&gt; connections,
+            'from'        =&gt; from,
+            'to'          =&gt; to,
+            'stations'    =&gt; stations,
+        ];
+
+        return result;
+    }
+function findLocations(LocationQuery query) \\ performs response action for user asking for locations on the map
+    {
+        result = this-&gt;sendAndParseQuery(query);
+        locations = [];
+        foreach (result as location) {
+            locations[] = Entity\LocationFactory::createFromJson(location);
+        }
+
+        return locations;
+    }
+function getStationBoard(StationBoardQuery query) \\performs response action for user asking for station details
+    {
+        result = this-&gt;sendAndParseQuery(query);
+        station = Station::createStationFromJson(result-&gt;stop);
+        journeys = [];
+        if (result-&gt;connections) {
+            foreach (result-&gt;connections as connection) {
+                journey = Entity\Schedule\StationBoardJourney::createFromJson(connection, null);
+                journey-&gt;stop-&gt;station = station;
+                journeys[] = journey;
+            }
+        }
+        stationboard = ['station' =&gt; station, 'stationboard' =&gt; journeys];
+        return stationboard;
+    }
+}
+</code></pre>
+<p>Adapter Firebase API</p>
+<p>Getting categories:</p>
+<pre><code>function getAllCategories = async (req: Request, res: Response) =&gt; {
+  try {
+    function allCategories = await db.collection('Categories').get()
+    return res.status(200).json(allCategories.docs)
+  } catch(error) { return res.status(500).json(error.message) }
+}
+export { addCategory, getAllCategories }
+
+</code></pre>
+<p>Getting places:</p>
+<pre><code>function findPlace(string input, string inputType, array  = []) \\ performs response action for user requesting places 
+    {
+        response = makeRequest(self::FIND_PLACE, )
+        return convertToCollection(response, 'candidates')
+    }
+function nearbySearch(string location, string radius = null, array  = []) \\ performs response action for user requesting places near their location
+    {
+        response = makeRequest(self::NEARBY_SEARCH_URL, )
+        return convertToCollection(response, 'results')
+    }
+function placeDetails(string placeId, array  = []) \\ performs response action for user requesting places
+    {
+        response = makeRequest(self::DETAILS_SEARCH_URL, )
+        return convertToCollection(response)
+    }    
+function getOptions(array , string method = 'get') \\gets response for user requesting options
+    {
+        options = [
+            'query' =&gt; [
+                'key' =&gt; key,
+            ],
+        ]
+        if (method == 'post') {
+            options = array_merge(['body' =&gt; json_encode()], options)
+        } else {
+            options['query'] = array_merge(options['query'], )
+        }
+
+        options['http_errors'] = false
+
+        if (!empty(headers)) {
+            options['headers'] = headers
+        }
+        return options
+</code></pre>
+<h3 id="improvement-of-model">Improvement of Model</h3>
+<p>I believe that the current model of the system is already exhibiting minimized coupling, the user interface has only two external dependencies, the database,payment gateway and transport. However in the payment option, instead of having the necessary adapter connect api (which enables creation of custom accounts in Stripe), this option can be kept optional thus leaving with only one api that is the Stripe API acting as the adapter.</p>
+<p>{.feedback</p>
+<p>Why do you write that the Stripe API acts as an adapter? What are the two interfaces which do not match and thanks to the Stripe API can successfully communicate?</p>
+<p>}</p>
+<h1 id="ex-physical-and-deployment-views">Ex - Physical and Deployment Views</h1>
+<p>{.instructions</p>
+<p>a. Extend your architectural model with the following viewpoints:</p>
+<ol>
+<li>
+<p>Physical or Container View</p>
+</li>
+<li>
+<p>Deployment View</p>
+</li>
+</ol>
+<p>Your model should be non-trivial: include more than one physical device/virtual container (or both). Be ready to discuss which connectors are found at the device/container boundaries.</p>
+<p>b. Write an ADR about which deployment strategy you plan to adopt. The alternatives to be considered are: big bang, blue/green, shadow, pilot, gradual phase-in, canary, A/B testing.</p>
+<p>c. (Optional) Prepare a demo of a basic continuous integration and delivery pipeline for your architectural documentation so that you can obtain a single, integrated PDF with all the viewpoints you have modeled so far. </p>
+<p>For example:</p>
+<ul>
+<li>configure a GitHub webhook to be called whenever you push changes to your documentation</li>
+<li>setup a GitHub action (or similar) to build and publish your documentation on a website</li>
+</ul>
+<p>Pass: 1 physical view, 1 deployment view, 1 ADR (b.)</p>
+<p>Good: &gt;1 physical view, &gt;1 deployment view, 1 ADR (b.)</p>
+<p>Exceed: 1 physical view, 1 deployment view, 1 ADR (b.) + 1 demo (c.)</p>
+<p>}</p>
+<h3 id="physical-view">Physical view</h3>
+<pre><code class="language-puml">@startuml
+rectangle &quot;Local Guide APK&quot; as q {
+component UserInterface as a1{
+component Services {
+      component Bookings as b1
+      component Mode
+
+}
+component Browsing{
+     component Search
+     component Filtering
+     component Info
+     component Location
+ }
+ component Personalize{
+   component Login
+   component Preferences
+   component Subscriptions
+ }
+}
+}
+
+
+rectangle &quot;Cloud&quot; as w{
+ component Firebase
+}
+
+rectangle &quot;Web&quot; as e{
+  component Stripe as r
+  component Transport as b2
+}
+ q -- w
+ q -- e
+ w -- r
+
+@enduml
+</code></pre>
+<h3 id="deployment-view">Deployment View</h3>
+<pre><code class="language-puml">@startuml
+
+
+node &quot;Web Server&quot; as d {
+component Transport as b
+component Stripe as s
+}
+
+node &quot;Android mobile device&quot; as a {
+node &quot;Local Guide APK&quot; {
+component UserInterface {
+component Services {
+      component Bookings
+      component Mode
+
+}
+component Browsing{
+     component Search
+     component Filtering
+     component Info
+     component Location
+ }
+ component Personalize{
+   component Login
+   component Preferences
+   component Subscriptions
+ }
+}
+}
+}
+
+node &quot;Google server&quot;  {
+  component Firebase as f
+}
+
+a -- f : HTTPS
+a -- b : HTTPS
+a -- s : HTTPS
+f -- s : HTTPS
+@enduml
+</code></pre>
+<h2 id="adr-for-deployment-strategy">ADR for Deployment Strategy</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Pilot</p>
+<ol>
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>What will be the most suitable deployment strategy for an app catering to the needs of a particular target audience locally?</p>
+<ol>
+<li>
+<p>Which alternative options did you consider?</p>
+</li>
+<li>
+<p>Pilot</p>
+</li>
+<li>Canary</li>
+<li>A/B Testing</li>
+<li>
+<p>Gradual Phase in</p>
+</li>
+<li>
+<p>Which one did you choose?</p>
+</li>
+</ol>
+<p>Pilot</p>
+<ol>
+<li>What is the main reason for that?</li>
+</ol>
+<p>The pilot is somewhat closely related to the big bang appraoch, but offers a slight different insight. With this strategy, instead of going live all at once, the application is deployed to a small and targeted group of users who can use the system in a controlled environment. This helps to gather user feedback, make changes and adjustments and improve the overall quality of the application.</p>
+<ol>
+<li>
+<p>List the positive consequences (pros) of your decision:</p>
+</li>
+<li>
+<p>If there are problems in the application, they are easier to catch and rectify if deployed initially to a limited set of users</p>
+</li>
+<li>A bit cheaper than having multiple versions in production, as only one version is in usage.</li>
+</ol>
+<h1 id="ex-availability-and-services">Ex - Availability and Services</h1>
+<p>{.instructions </p>
+<p>The goal of this week is to plan how to deliver your software as a service with high availability.</p>
+<ol>
+<li>If necessary, change your deployment design so that your software is hosted on a server (which could be running as a Cloud VM). Your SaaS architecture should show how your SaaS can be remotely accessed from a client such as a Web browser, or a mobile app</li>
+<li>Sketch your software as a service pricing model (optional)</li>
+<li>How would you define the availability requirements in your project domain? For example, what would be your expectation for the duration of planned/unplanned downtimes or the longest response time tolerated by your clients?</li>
+<li>Which strategy do you adopt to monitor your service's availability? Extend your architecture with a watchdog or a heartbeat monitor and motivate your choice with an ADR.</li>
+<li>What happens when a stateless component goes down? model a sequence diagram to show what needs to happen to recover one of your critical stateless components</li>
+<li>How do you plan to recover stateful components? write an ADR about your choice of replication strategy and whether you prefer consistency vs. availability. Also, consider whether event sourcing would help in your context.</li>
+<li>How do you plan to avoid cascading failures? Be ready to discuss how the connectors (modeled in your connector view) impact the reliability of your architecture.</li>
+<li>How did you mitigate the impact of your external dependencies being not available? (if applicable)</li>
+</ol>
+<p>Pass: 1, 3, 4, one of:  5, 6, 7, 8</p>
+<p>Good: 1, 2, 3, 4, two of:  5, 6, 7, 8</p>
+<p>Exceed: 1, 2, 3, 4, 5, 6, 7, 8</p>
+<p>}</p>
+<h1 id="ex-scalability">Ex - Scalability</h1>
+<p>{.instructions </p>
+<p>Now that your architecture delivers your software as a service, let's redesign it so that it can scale!</p>
+<ol>
+<li>
+<p>Pick one scalability dimension: number of clients, size of input, size of state, number of dependencies</p>
+</li>
+<li>
+<p>How well does your architecture scale along the chosen dimension? Where do you expect the bottleneck to be?</p>
+</li>
+<li>
+<p>Modify your architecture to remove the scalability bottleneck you have identified (show both logical, process and deployment view) - consider whether the API/interface of the bottleneck component should be improved.</p>
+</li>
+<li>
+<p>Write an ADR regarding the scalability pattern you have introduced.</p>
+</li>
+<li>
+<p>Write an ADR regarding the issue of component discovery, choosing one of the alternatives: dependency injection vs. directory. Can you identify an existing component playing the role of directory/dependency injection container? Could you give an example of where you would need to add such component to facilitate dynamic component discovery?</p>
+</li>
+</ol>
+<p>Pass: 1, 2, 3, 5</p>
+<p>Good: 1, 2, 3, 4, 5</p>
+<p>Exceed: 1, 2, 3, 4, 5 then redo 1, 2, 3 for different scalability dimensions</p>
+<p>}</p>
+<h1 id="ex-flexibility">Ex - Flexibility</h1>
+<p>{.instructions </p>
+<p>Only dead software stops changing. You just received a message from your customer, they have an idea. Is your architecture ready for it?</p>
+<ol>
+<li>
+<p>Pick a new use case scenario. Precisely, what exactly do you need to change of your existing architecture so that it can be supported? Model the updated logical/process/deployment views.</p>
+</li>
+<li>
+<p>Pick another use case scenario so that it can be supported without any major architectural change (i.e., while you cannot add new components, it is possible to extend the interface of existing ones or introduce new dependencies). Illustrate with a process view, how your previous design can satisfy the new requirement.</p>
+</li>
+<li>
+<p>Change impact. One of your externally sourced component/Web service API has announced it will introduce a breaking change. What is the impact of such change? How can you control and limit the impact of such change? Update your logical view</p>
+</li>
+<li>
+<p>Open up your architecture so that it can be extended with plugins by its end-users. Where would be a good extension point? Update your logical view and give at least one example of what a plugin would actually do.</p>
+</li>
+<li>
+<p>Assuming you have a centralized deployment with all stateful components storing their state in the same database, propose a strategy to split the monolith into at least two different microservices. Model the new logical/deployment view as well as the interfaces of each microservice you introduce.</p>
+</li>
+</ol>
+<p>Pass: 1, one out of 2-5.</p>
+<p>Good: 1, two out of 2-5.</p>
+<p>Exceed: 1-5.</p>
+<p>}</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.3.0
+Build Date UTC : 2022-05-05 12:50:52.765734+00:00
+-->

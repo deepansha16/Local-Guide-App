@@ -1,0 +1,1154 @@
+<html>
+
+<head>
+    <title>Software Architecture of Local Guide by Deepansha Chowdhary</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Fira+Mono">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/styles/default.min.css">
+    <style>
+        img[src^="./c5_"] {width: 500px}
+        body,
+        * {
+            font-family: "Fira Sans";
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 1em;
+        }
+
+        #usi-logo {
+            width: 75px;
+            height: 75px;
+        }
+
+        header {
+            display: flex;
+            align-content: space-between;
+            width: 100%;
+            justify-items: center;
+        }
+
+        header ul {
+            list-style: none;
+        }
+
+        header .title {
+            flex: 1;
+            margin-left: 1em;
+        }
+
+        html {
+            min-height: 100vh;
+        }
+
+        pre,
+        code {
+            font-family: "Fira Mono"
+        }
+
+        pre {
+            background: rgb(202, 227, 255);
+            padding: 1em;
+        }
+
+        td {
+            text-align: center
+        }
+
+        td:last-child {
+            text-align: left;
+        }
+
+        th {
+            font-weight: normal;
+            color: rgb(0, 61, 131);
+        }
+
+        thead {
+            border-bottom: 2px solid rgb(202, 227, 255);
+        }
+
+        table {
+            width: 100%
+        }
+
+        span.task {
+            display: inline-flex;
+            border-radius: 50%;
+            border: 1px solid white;
+            background: #ffbc00;
+            width: 2em;
+            height: 2em;
+            justify-content: center;
+            align-items: center;
+            font-weight: normal;
+            margin-top: 2em;
+        }
+
+        section.feedback {
+            padding: 2em;
+            background-color: rgb(92, 192, 223);
+            background-image: linear-gradient(1deg, white, transparent,rgba(255,255,255,0.5) 90%,transparent 100%);
+        }
+
+        section.instructions {
+            padding: 2em;
+            background-color: rgb(255, 241, 196);
+            background-image: linear-gradient(1deg, white, transparent,rgba(255,255,255,0.5) 90%,transparent 100%);
+        }
+
+        section.instructions::before {
+            content: "Task Description";
+            font-size: 1.75em;
+            color: #ffbc00;
+            font-weight: bold;
+            transform: translateY(-2em) rotate(1deg);
+            display: block;
+            margin-bottom: -2em;
+            text-align: center;
+        }
+
+        section.pass, section.exceed, section.ok {
+            margin-top: 1em;
+        }
+
+        section.pass span, section.exceed span, section.hint span, section.ok span {
+            margin-right: 0.5em;
+            padding: 0.5em;
+            display: inline-block;
+        }
+
+        section.pass {
+            border: 2px solid green;
+        }
+
+        section.ok {
+            border: 2px solid rgb(6, 175, 6);
+        }
+
+        section.exceed {
+            border: 2px solid rgb(34, 255, 34);
+        }
+
+        section.hint {
+            border: 2px solid rgb(255, 214, 34);
+        }
+
+        section.pass span {
+            background-color: green; color: white;
+            background-image: linear-gradient(45deg, #000000a6, transparent);
+        }
+
+        section.ok span {
+            background-color: rgb(6, 175, 6); color: white;
+            background-image: linear-gradient(135deg, #000000a6, transparent);
+        }
+
+        section.exceed span {
+            background-color: rgb(34, 255, 34); 
+            background-image: linear-gradient(-45deg, white, transparent);
+        }
+
+        section.hint span {
+            background-color: rgb(255, 214, 34);
+            background-image: linear-gradient(-45deg, white, transparent);
+        }
+
+        .deadline {
+            text-align: right;
+        }
+
+        p.deadline {
+            font-size: 2em;
+        }
+
+        .deadline b {
+            border-bottom: 1px solid black;
+        }
+
+        form label {
+            display: inline-block;
+            margin-right: 1em;
+            vertical-align: middle;
+        }
+
+
+form button {
+    min-width: 10em;
+    min-height: 2em;
+    background: #008d4f;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+form input[type=text],
+form textarea,
+form select {
+    flex: 3;
+    margin: 0.5em;
+	font-size: 1.1em;
+}	
+
+form p { display: flex; 
+	align-items: stretch;
+    min-height: 2.5em;
+    padding-left: 0.5em; 
+flex-direction: column}
+
+    </style>
+</head>
+<body>
+
+    <header>    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="usi-logo" x="0px" y="0px" width="200" height="200" viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve" class="injected-svg svg">
+        <g>
+            <path d="M180,41.7h-51.1V31.1h42.2C153.1,12.5,127.8,1,99.9,1C45.2,1.1,0.9,45.4,1,100.1c0,26.8,10.7,51.1,28.1,68.9   c-1.4-2-2.4-4.1-3-6.1c-1-3.5-1-5.9-1.1-15.8v-47.1h14.8v48.5c0,3.4-0.1,6.6,1,9.6c3,7.6,11.3,8.5,16,8.5c2.3,0,8.3-0.1,12.6-3.9   c4.4-3.9,4.4-8.4,4.4-15v-47.7h14.9v49.7c-0.1,8.9-0.1,16.3-8.5,23.5c-8,7-18.4,7.7-23.8,7.7c-4.8,0-9.5-0.6-14-2.1   c-1.8-0.6-3.5-1.4-5-2.3c17.1,14,39,22.4,62.8,22.4c54.7-0.1,99-44.4,98.9-99.1C199,78.1,191.9,58,180,41.7z M175.3,94.4l-6.3-9   c2.1-1.4,8.7-5.7,8.7-17.7c0-2-0.2-4.1-1-6.2c-1.7-4.1-4.6-4.9-6.6-4.9c-3.6,0-4.9,2.5-5.7,4.3c-0.5,1.3-0.6,1.5-1.8,6.6l-1.5,6.9   c-0.9,3.6-1.3,5.4-2,7.2c-1.1,2.6-4.5,9.6-14,9.6c-10.9,0-17.8-9.2-17.8-22.6c0-12.3,6.1-19,11.6-23l6.6,8.8   c-2.8,1.9-8.5,5.7-8.5,14.8c0,5.8,2.6,10.8,7,10.8c4.9,0,5.8-5.3,6.8-10.5l1.3-5.9c1.6-7.7,4.8-18.6,17-18.6   c13.1,0,18.4,12.2,18.4,24.3c0,3.2-0.3,6.7-1.3,10.2C185.1,83.4,182.3,90.1,175.3,94.4z"></path>
+        </g>
+        </svg>
+        <div class="title">
+            <h2></h2>
+            <h1>Software Architecture of Local Guide by Deepansha Chowdhary</h1>
+        </div>
+        <ul>
+            <li>Prof. Cesare Pautasso</li>
+        </ul>
+        </header>
+
+    <main>
+        <h1 id="ex---domain-selection"><span class='task'>1.</span>  Domain Selection</h1>
+<section><p>Domain Description:</p>
+<pre><code>For [target customers] 
+Who [need/opportunity/problem]
+The [name your project]
+Is  [type of project]
+That [major features, core benefits, compelling reason to buy]
+Unlike [current reality or competitors]
+Our Project [summarize main advantages over status quo, unique selling point]
+</code></pre>
+</section><p>Project Name: <em>Local Guide</em></p>
+<p>Project Type:</p>
+<p>Vision Statement:</p>
+<p>For [target customers] Youth, people under 30 years, essentially newcomers who are planning to shift to Lugano</p>
+<p>Who [need/opportunity/problem]</p>
+<p>Google maps exists, but it exhibits a very global outlook on everything. You might see a lot of supermarkets in the search list, but what about the cheapest one? Or the one with the best quality? Results are vast, but often not very  precise. Not only that, Google searches can get messy, require a lot of memory retention on users part, for someone who has never set foot in foregin land - settling down can become a nightmare. Having observing students on various groups and forums, despite the vast amount of info available on the internet, many people remain clueless about the most basic needs, which in fact are the most important ones. For that purpose,such apps are the need of the hour, as the summarize the exact information an individual may require.</p>
+<p>The Local Guide</p>
+<p>Is  [type of project] a mobile application</p>
+<p>That [major features, core benefits, compelling reason to buy]</p>
+<p>Features:</p>
+<ul>
+<li>Distinct categories for each necessity, : transportation, clothes, furniture, shopping, medical, financial,work related etc</li>
+<li>Basic info for every category will be listed, most common banks, mobile network providers, waste management rules etc</li>
+<li>All categories have the best option listed for them, and links provided for more additional info</li>
+<li>Language mode so users are able to read at their own comfort</li>
+<li>Filters for every option based on: prices, distance, quality ratings (given by the users)</li>
+<li>Users can compare prices of items between two shops</li>
+<li>Users will be offered incentives, discounts to motivate them to review places visited by them more</li>
+<li>As a future prospect: to add modes in the app, traveler and new settler mode: to help personalize the users experience</li>
+</ul>
+<p>Why this app?</p>
+<p>Shifting to a new country is a very different experience, something that no one can ever be fully well prepared for - what more could someone yearn for than a curated view of the best options for your basic amenities? Local Guide gets you exactly that - be it anything you want to know, best insurance, best bank to open an account in, cheap shopping options - everything is there in the app. Everyone knows the big names, but what the local shops, that don&#39;t turn up in the google search results, that actually keep relevant stuff - is what this app focuses on.</p>
+<p>Unlike [current reality or competitors] Google Maps</p>
+<p>Our Project [summarize main advantages over status quo, unique selling point]
+More localized view of things, considering a students point of view - keeping in mind their budget and all the basic amenities that one needs in a new place. Removes the need to search for multiple things one at a time, all the information is available for you in one single app</p>
+<p>Additional Information:</p>
+<p>This is a new project I plan on implementing in the future.</p>
+<h1 id="ex---architectural-decision-records"><span class='task'>2.</span>  Architectural Decision Records</h1>
+<h2 id="adr-1--implementation-of-offline-mode">ADR 1 : Implementation of Offline Mode</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Database: Realm Database</p>
+<ol start="2">
+<li>What was the context for your decision?</li>
+</ol>
+<p>The main aim of this decision is to find the most beneficial and optimal solution that takes into consideration the functionalities of the Local Guide app. The main requirement that is into focus, is that the data and the user interface of the application should be made available to the user at all times,with or without network connection.</p>
+<p>What is the goal you are trying to achieve?</p>
+<p>Allow users to access all the UI and information of the app offline.</p>
+<p>What are the constraints?</p>
+<p>Limitation on a single string&#39;s length.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision impacts the entire architecture as the selection of the database is of prime importance, because it will be the main storage for all the data required for the mobile app.</p>
+<ol start="3">
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can I give the users the benefit of accessing the information at all times?</p>
+<ol start="4">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>SQLite Database</li>
+<li>CoreData</li>
+<li>Realm Database</li>
+</ul>
+<ol start="5">
+<li>Which one did you choose?</li>
+</ol>
+<p>Realm Database</p>
+<ol start="6">
+<li>What is the main reason for that?</li>
+</ol>
+<p>It fulfills the main purpose of the application, to give users the feature to access all the information even when offline, in scenarios where there is no access to data or Wifi and also it is fully compatible with Java, which will be used to develop the mobile app. </p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Essentially designed for offline use as it can handle the unpredictability concerning mobile apps, such as lost connections, devices being shut down at unfavorable timings and so on. As it is offline first, it is always read from and written to the local database and not over the network.</li>
+<li>As this is a local guide app, the most important component will the keeping the UI in sync, realm used live objects which always reference the most up-to-date data on disk when accessed. </li>
+<li>As it runs on the client devices, storing, accessing and updating the data is simple.</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>As Realm offers many features, it consequently requires a bit more effort for implementation.</li>
+</ul>
+<h2 id="adr-2--programming-language">ADR 2 : Programming Language</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Language: Java</p>
+<ol start="2">
+<li>What was the context for your decision?</li>
+</ol>
+<p>The main purpose of this decision was to find the suitable programming language that will be compatible with the database selected in the previous decision.</p>
+<p>What is the goal you are trying to achieve?</p>
+<p>Compatibility with database and development of mobile app.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision applies to the entire project and is of upmost importance.</p>
+<ol start="3">
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can we find a suitable language that interoperates with the chosen database?</p>
+<ol start="4">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Kotlin</li>
+<li>Dart</li>
+<li>C++</li>
+<li>Java</li>
+</ul>
+<ol start="5">
+<li>Which one did you choose?</li>
+</ol>
+<p>Java</p>
+<ol start="6">
+<li>What is the main reason for that?</li>
+</ol>
+<p>Java has one of the most intensive support available, which makes it better for the team to develop the application. Plus, as the project requires several other API&#39;S such as geo location services,language translators, database functions, java fulfills the goal.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Versatile to integrate distinctive apps and functions</li>
+<li>Secure environment for design and development</li>
+<li>Has a lot of built in tools and rich set of library.</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>Takes longer time to run</li>
+</ul>
+<h2 id="adr-3--monetization-model">ADR 3 : Monetization Model</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Model: Combination of In app purchases and Sponsorship</p>
+<ol start="2">
+<li>What was the context for your decision?</li>
+</ol>
+<p>The purpose to be looked into is how will the app be monetized after its post deployment stage.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The scope of this decision extends to the post deployment stage of the application</p>
+<ol start="3">
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>What will be the revenue generation strategy of the app?</p>
+<ol start="4">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>In-App Advertising</li>
+<li>Pay to download apps</li>
+<li>Paywalled Content</li>
+<li>Transactions Commissions</li>
+<li>Subscriptions</li>
+<li>In app purchases</li>
+</ul>
+<ol start="5">
+<li>Which one did you choose?</li>
+</ol>
+<p>Combination of the subscription and in app purchases model.</p>
+<ol start="6">
+<li>What is the main reason for that?</li>
+</ol>
+<p>The reason for selecting the combination is to divide the monetization into two different strategies, as one strategy can often prove to become outdated after some time, or not favorable for the business.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>In-app purchases help in promotions of the application&#39;s unique functionalities</li>
+<li>Subscriptions are beneficial to users in the long run, which in turn increase good word of mouth for both the app and the businesses connected with it</li>
+<li>Reduced costs of acquiring new customers.</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>The revenue generation process could be a bit slow and time consuming, as it takes time to build the loyalty of customers.</li>
+</ul>
+<h1 id="ex---quality-attribute-scenario"><span class='task'>3.</span>  Quality Attribute Scenario</h1>
+<section class="instructions"><ol>
+<li><p>Pick a scenario for a specific quality attribute. Describe it with natural language.</p>
+</li>
+<li><p>Refine the scenario using the following structure:</p>
+</li>
+</ol>
+<img src="./puml_e0.svg"><p><em>Stimulus</em>: condition affecting the system</p>
+<p><em>Source</em>: entity generating the stimulus</p>
+<p><em>Environment</em>: context under which stimulus occurred (e.g., build, test, deployment, startup, normal operation, overload, failure, attack, change)</p>
+<p><em>Response</em>: observable result of the stimulus</p>
+<p><em>Measure</em>: benchmark or target value defining a successful response</p>
+<section class="pass"><span>&starf;&star;&star;: </span>3 scenarios</section><section class="ok"><span>&starf;&starf;&star;: </span>&gt;3 scenarios</section><section class="exceed"><span>&starf;&starf;&starf;: </span>&gt;6 scenarios using challenging qualities</section></section><h2 id="example-scenario">Example Scenario</h2>
+<p>Quality: <em>Recoverability</em></p>
+<p>Scenario: In case of power failure, rebooting the system should take up to 20 seconds.</p>
+<p><img src="/Users/deepanshachowdhary/Documents/software-architecture-model-deepansha16/upload/sa/model/puml_e2.svg" alt="file"></p>
+<img src="./puml_e1.svg"><h2 id="local-guide-scenarios">Local Guide Scenarios</h2>
+<p>Quality: <em>Availability</em></p>
+<p>Scenario: In case of loss of network connectivity on the users side, the system is supposed to fetch the required data from realm, and sync it with the interface to be displayed to the user.</p>
+<img src="./puml_e2.svg"><p>Quality: <em>Modifiability</em></p>
+<p>Scenario: Developer wants to update details in the database for a particular category</p>
+<img src="./puml_e3.svg"><p>Quality: <em>Functionality</em></p>
+<p>Scenario: System stores the browsing details of the user as preferences within the columns category_id and shop_name in the database.</p>
+<img src="./puml_e4.svg"><p>Quality: <em>Usability</em></p>
+<p>Scenario: If a new user faces issues in operating the application, the system suggests the help button to them, and operation afterwards going through the help shouldn&#39;t take more than 3 minutes.</p>
+<img src="./puml_e5.svg"><p>Quality: <em>Interoperability</em></p>
+<p>Scenario : The user selects the directions button for a particular shop, the app should be able to correctly map the location to the place selected by the user and display it on google maps.</p>
+<img src="./puml_e6.svg"><p>Quality: <em>Security</em></p>
+<p>Scenario: Have the connected authentication api be called at the time of login into the application by the user.</p>
+<img src="./puml_e7.svg"><p>Quality: <em>Changeability</em></p>
+<p>Scenario: Addition of a new payment processing method for the in app purchases.</p>
+<img src="./puml_e8.svg"><h1 id="ex---quality-attribute-tradeoff"><span class='task'>4.</span>  Quality Attribute Tradeoff</h1>
+<h2 id="portability-vs-performance-example">Portability vs. Performance (Example)</h2>
+<p>Developing an app natively for each OS is expensive and time consuming, but it benefits from a good performance. Choosing a cross-platform environment on the other hand simplify the development process, making it faster and cheaper, but it might suffer in performance.</p>
+<h1 id="trade-offs">Trade-offs</h1>
+<h2 id="extensibility-and-design-consistency">Extensibility and Design Consistency</h2>
+<p>In order to keep the operations simplified and easier to identify for the users, a same design pattern needs to be maintained, across all the different screens of the application - so that users do not get confused when trying out different alternatives in the app. Keeping design consistent does hold up customer’s expectations but for future prospects, growing the architecture further will put a lot of constraints on the development of the app and more time and effort in implementation.</p>
+<h2 id="customizability-and-composability">Customizability and Composability</h2>
+<p>Creating a lot of customizations for the users in the application will make the app more useful and assist them in more advanced levels, but it would require many sub components and interconnections within the app which would lead to utilization of  a lot of resources and increment of development costs.</p>
+<h2 id="adaptability-and-performance">Adaptability and Performance</h2>
+<p>As an application that works as a guidebook for the users, one of the prime advantages is that it can be highly adaptable to the user’s preferences, interests, and new trends in the market, but as the complexity increases, it will overload the development process, leading to possible reductions in performance.</p>
+<h1 id="ex---feature-modeling"><span class='task'>5.</span>  Feature Modeling</h1>
+<section class="instructions"><p>In the context of your chosen project domain, describe your domain using a feature model.</p>
+<p>The feature model should be correctly visualized using the following template:</p>
+<p><img src="./puml_0.svg" alt="Example Feature Model Diagram"></p>
+<p><img src="./fml_0.svg" alt="Example Feature Model Diagram"></p>
+</section><img src="./puml_e9.svg"><h1 id="ex---context-diagram"><span class='task'>6.</span>  Context Diagram</h1>
+<section class="instructions"><p>Prepare a context diagram to define the design boundary for your project.</p>
+<p>Here is a PlantUML/C4 example to get started.</p>
+<p><img src="./puml_1.svg" alt="Example Context Diagram"></p>
+</section><img src="./puml_e10.svg"><h1 id="ex---component-model-top-down"><span class='task'>7.</span>  Component Model: Top-Down</h1>
+<section class="instructions"><p>Within the context of your project domain, represent a model of your modular software architecture decomposed into components.</p>
+<p>The number of components in your logical view should be between 6 and 9:</p>
+<ul>
+<li>At least one component should be further decomposed into sub components</li>
+<li>At least one component should already exist. You should plan how to reuse it, by locating it in some software repository and including in your model the exact link to its specification and its price.</li>
+<li>At least one component should be stateful.</li>
+</ul>
+<p>The logical view should represent provide/require dependencies that are consistent with the interactions represented in the process view.</p>
+<p>The process view should illustrate how the proposed decomposition is used to satisfy the main use case given by your domain model.</p>
+<p>You can add additional process views showing how other use cases can be satisfied by the same set of components.</p>
+<p>This assignment will focus on modularity-related decisions, we will worry about deployment and the container view later.</p>
+<p>Here is a PlantUML example logical view and process view.</p>
+<img src="./puml_e11.svg"><section class="hint"><span>Hint: </span>How to connect sub-components to other external components? Use this pattern.</section><img src="./puml_e12.svg"></section><h2 id="logical-view">Logical View</h2>
+<img src="./puml_e13.svg"><h2 id="process-views">Process Views</h2>
+<p>Use case 1 : User operates the application</p>
+<img src="./puml_e14.svg"><p>Use Case 2 : User makes a purchase within the application</p>
+<img src="./puml_e15.svg"><p>Use Case 3 : Subscription process in the application</p>
+<img src="./puml_e16.svg"><p>Use case 4 : Selection of App Mode (Traveller/Settler) by the User</p>
+<img src="./puml_e17.svg"><h1 id="ex---component-model-bottom-up"><span class='task'>8.</span>  Component Model: Bottom-Up</h1>
+<section class="instructions"><p>Within the context of your project domain, represent a model of your modular software architecture decomposed into components.</p>
+<p>To design this model you should attempt to buy and reuse as many components as possible.</p>
+<p>In addition to the logical and process views, you should give a precise list to all sources and prices of the components you have selected to be reused.</p>
+<p>Write an ADR to document your component selection process (indicating which alternatives were considered).</p>
+</section><h2 id="logical-view-1">Logical View</h2>
+<img src="./puml_e18.svg"><p>Price and specification of components</p>
+<p>Material Design UI toolkit for component User Interface</p>
+<p>Price: free</p>
+<p>Specs: <a href="https://material.io/components?platform=android">https://material.io/components?platform=android</a></p>
+<p>Firebase for stateful component Database</p>
+<p>Price: free at start but gradually increases if application is scaled up</p>
+<p>Specs : </p>
+<ul>
+<li><a href="https://firebase.google.com/docs/android/setup">https://firebase.google.com/docs/android/setup</a></li>
+<li><a href="https://firebase.google.com/docs/database/android/start">https://firebase.google.com/docs/database/android/start</a></li>
+<li><a href="https://firebase.google.com/">https://firebase.google.com/</a></li>
+</ul>
+<p>Payment Gateway : Stripe</p>
+<p><a href="https://github.com/firebase/functions-samples/tree/main/stripe">https://github.com/firebase/functions-samples/tree/main/stripe</a></p>
+<h2 id="process-views-1">Process Views</h2>
+<p>Use case : User operating the application with all of its functionalities </p>
+<img src="./puml_e19.svg"><p>Use case 2 : User creating check-in request in Bookings component</p>
+<img src="./puml_e20.svg"><h2 id="adr-1--selection-of-ui-toolkit">ADR 1 : Selection of UI toolkit</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>UI Toolkit : Material Design</p>
+<ol start="2">
+<li>What was the context for your decision?</li>
+</ol>
+<p>The aim of this decision is to find the most optimal solution so that the development time for the user interface can be reduced considerably</p>
+<p>What is the goal you are trying to achieve?</p>
+<p>Design an interface that is appealing to the users and consumes less work hours.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision only impacts the look and feel of the mobile app</p>
+<ol start="3">
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can a developer create the most user friendly app with minimal effort and less code?</p>
+<ol start="4">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Material Design</li>
+<li>Jetpack compose</li>
+</ul>
+<ol start="5">
+<li>Which one did you choose?</li>
+</ol>
+<p>Material Design</p>
+<ol start="6">
+<li>What is the main reason for that?</li>
+</ol>
+<p>It comprises all the features that will be implemented for the application, and as the app caters to the tourism industry, it needs to have an aesthetic appeal, and that particular purpose is fulfilled by Material’s pre-written code for different types of UI components.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Reduction of code, which would otherwise increase the workload if hardcoded in java</li>
+<li>As it is developed by Google, makes it more easier to integrate with api’s efficiently</li>
+</ul>
+<h2 id="adr-2--selection-of-a-different-database">ADR 2 : Selection of a different database</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Firebase</p>
+<ol start="2">
+<li>What was the context for your decision?</li>
+</ol>
+<p>The goal of this decision was to find another database which offers all the features as the previously selected one (Realm Database), and offers a method to integrate the Security component of the app within the database itself.</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>As the database is the main component dealing with storage and querying, this decision impacts the entire structure of the application</p>
+<ol start="3">
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>How can the selection of the database be maneuvered in such a way that it handles the security component and effortless integration with Google APIs? </p>
+<ol start="4">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Firebase</li>
+<li>Cloud Firestore</li>
+<li>Elasticsearch</li>
+</ul>
+<ol start="5">
+<li>Which one did you choose?</li>
+</ol>
+<p>Firebase</p>
+<ol start="6">
+<li>What is the main reason for that?</li>
+</ol>
+<p>The main purpose that will be served by firebase is integration of the security component within itself, and also as the developer has already experience with this technology, it will be less time consuming as compared to the previous decisions of Realm Database, which required everything to be learned from scratch.</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>As a Google Cloud service, it also gives you access to other Google products and features, in this case the UI toolkit and api</li>
+<li>When the app is linked with Firebase, there is no need for creation of a separate login interface, as its built-in login UI can be utilized to sign users into the app</li>
+</ul>
+<h1 id="ex---interfaceapi-specification"><span class='task'>9.</span>  Interface/API Specification</h1>
+<section class="instructions"><p>In this iteration, we will detail your previous model to specify the provided interface of all components based on their interactions found in your existing process views.</p>
+<ol>
+<li><p>choose whether to use the top down or bottom up model. If you specify the interfaces of the bottom up model, your interface descriptions should match what the components you reuse already offer.</p>
+</li>
+<li><p>decide which interface elements are operations, properties, or events.</p>
+</li>
+</ol>
+<p>Get started with one of these PlantUML templates, or you can come up with your own notation to describe the interfaces, as long as it includes all the necessary details.</p>
+<p>The first template describes separately the provided/required interfaces of each component. </p>
+<p><img src="./puml_2.svg" alt="Separate Required/Provided Interfaces"></p>
+<p>The second template annotates the logical view with the interface descriptions: less redundant, but needs the logical dependencies to be modeled to show which are the required interfaces.</p>
+<p><img src="./puml_3.svg" alt="Shared Interfaces"></p>
+</section><h2 id="api-specification">API Specification:</h2>
+<img src="./puml_e21.svg"><p>Local Guide component refers to the database created inside the Firebase console.</p>
+<h2 id="open-api-description">Open API Description</h2>
+<p><img src="./examples/api.png" alt="Local guide Open API Description"> </p>
+<h1 id="ex---connector-view"><span class='task'>10.</span>  Connector View</h1>
+<section class="instructions"><p>Extend your existing models introducing the connector view</p>
+<p><img src="./c5_1.svg" alt="Example Connector View Diagram"></p>
+<p>For every pair of connected components (logical view), pick the most suitable connector. Existing components can play the role of connector, or new connectors may need to be introduced.</p>
+<p>Make sure that the interactions shown in the process views reflect the primitives of the selected connector</p>
+</section><p> <img src="./c5_2.svg" alt="Connector View Diagram"></p>
+<p>New Connectors</p>
+<ol>
+<li><p>ConnectAPI which stands for Stripe Connect, which is essentially a platform that enables specific users of the app, targetted towards shop owners and online marketplaces which will enable them to get paid via stripe. On top of that it offers owners the functionality of tools such as CRM analytics.</p>
+</li>
+<li><p>Transport API is the local Swiss Public Transport API, which covers public transport within Switzerland. The API uses a web service provided by search.ch. It has resources for locations, connections, station board etc.</p>
+</li>
+</ol>
+<p>Specs: </p>
+<p><a href="https://transport.opendata.ch/docs.html">https://transport.opendata.ch/docs.html</a></p>
+<p><a href="https://timetable.search.ch/api/help">https://timetable.search.ch/api/help</a></p>
+<p>Existing Connectors</p>
+<ol>
+<li>REST API is the Firebase REST API, which will be used for all the calls between the components.</li>
+</ol>
+<h3 id="process-views-2">Process Views</h3>
+<p>Use case 1: Operation using the Transport API</p>
+<img src="./puml_e22.svg"><p>Use case 2: Operation using Stripe Connect API</p>
+<img src="./puml_e23.svg"><h3 id="adr-1-selection-of-api-connector">ADR 1: Selection of API connector</h3>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>API as a connector</p>
+<ol start="2">
+<li>What was the context for your decision?</li>
+</ol>
+<p>The goal is to fix the  mismatch for the transport sub component in the UI. </p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>It affects only the user interface of the application, as transport is a sub component in it</p>
+<ol start="3">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>API connector</li>
+<li>A shared database with information on transport</li>
+<li>tuple with different transport functionalities mapped inside of it</li>
+</ul>
+<ol start="4">
+<li>Which one did you choose?</li>
+</ol>
+<p>API connector</p>
+<ol start="5">
+<li>What is the main reason for that?</li>
+</ol>
+<p>The main reason for this selection is primarily the mismatch between the transport sub component of the interface,as there were no relevant shared databases as such to get the information, as for now the app is restricted to transportation within switzerland, and no other type of connector is valid for the interaction I wanted to show, so I decided to go ahead with the transport api which provides public transport within Switzerland. The API uses a web service provided by search.ch</p>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>Since the api connector has the information for transport specific to switzerland, it helps to narrow down the work for the developer and eliminates the need to create a new component from scratch.</li>
+<li>Handles the mismatch between the component functionality.</li>
+</ul>
+<h1 id="ex---adapters-and-coupling"><span class='task'>11.</span>  Adapters and Coupling</h1>
+<section class="instructions"><ol>
+<li>Highlight the connectors (or components) in your existing bottom-up design playing the role of adapter. (We suggest to use the bottom-up design since when dealing with externally sourced components, their interfaces can be a source of mismatches).</li>
+<li>Which kind of mismatch** are they solving?</li>
+<li>Introduce a wrapper in your architecture to hide one of the previously highlighted adapters</li>
+<li>Where would standard interfaces play a role in your architecture? Which standards could be relevant in your domain?</li>
+<li>Explain how one or more pairs of components are coupled according to different coupling facets</li>
+<li>Provide more details on how each adapter solves the mismatches identified using pseudo-code or the actual code</li>
+<li>How can you improve your architectural model to minimize coupling between components? (Include a revised logical/connector view with your solution)</li>
+</ol>
+</section><h3 id="adapter-in-bottom-up-model">Adapter in bottom-up Model</h3>
+<p>The bottom-up model has changed from its previous version as in the Connector view assignment, Transport componenent was removed from being the sub component in the User Interface and now will be an external componennt connected to the interface with the relevant api acting as the adapter. </p>
+<p>The three adapters already functional are:</p>
+<ul>
+<li>Firebase API </li>
+<li>Transport API </li>
+<li>Stripe API</li>
+</ul>
+<h3 id="mismatch-solved">Mismatch solved</h3>
+<p>The name of the functions that will be resolved in the mismatch are listed in the code below.</p>
+<ol>
+<li>Firebase API served as the main adapter for coordinating the calls between the user interface and the database.</li>
+</ol>
+<p>The set of functions performed at the user interface side will be something as follows:</p>
+<p>function requestCategories
+function getLocations
+function requestStationDetails
+function requestOptions
+function requestPlaces
+function requestConnections
+function sendQueries
+function sendPaymentRequest
+function getPlacesNearMe</p>
+<p>All of these functions will be a set of inputs given by the user, and the api adapters include the set of functions that help perform the specific response for each of these function sets.</p>
+<ol start="2">
+<li><p>Transport API solves the mismatch of the mobile app having transport functionality within itself(booking transport around swiss),the api directs the user to the trnsprt.ch, through which they can search the conenctions between the desired locations.</p>
+</li>
+<li><p>Using Stripe api as the adapter, it solves the mismatch  by connecting the user interface to external payment gateway Stripe.</p>
+</li>
+</ol>
+<h3 id="wrapper">Wrapper</h3>
+<img src="./puml_e24.svg"><section class="feedback"><p>Please rewire the wrapper to use the following structure:</p>
+<pre><code>@startuml
+interface External as I
+component Wrapper {
+
+component Adapter
+
+Adapter - I
+
+component Incompatible
+interface Internal as i
+
+Incompatible - i
+
+Adapter --( i
+
+}
+@enduml
+</code></pre>
+<p>The Adapter component is missing from your model</p>
+</section><h3 id="standard-interfaces">Standard Interfaces</h3>
+<p>Considering the standard interfaces required in the tourism domain,almost all of the components of the bottom-up model conform to the most widely used interfaces when designing of such an application. So for example, in the category of platforms- mobile apps are more in demand than websites/web apps, and the widely used databases for such domains include: Firebase, MySQL, SQLite, MongoDB etc. Earlier in the top-up model, unconventional databases (like RealmDB) were being used, but the model that currently stands is refined to set of standards defined.</p>
+<h3 id="coupling-facets">Coupling Facets</h3>
+<h5 id="platform-independence">Platform Independence</h5>
+<p>The architecture essentially is platform independent, as the database being used for the application is Firebase, which has support for quite a lot of languages: java, swift, kotlin etc. and also for both the platforms: web and android. In the future, if the implementation will have to be shifted to another language, the client side could only notice slight changes in the UI, but the internal functionality will remain the same.</p>
+<h5 id="interaction">Interaction</h5>
+<p>The interaction between user  and the external components cannot be indirect. Considering the first case, the user interface makes use of the firebase rest api which plays the role of an adapter pulling data from firebase and displaying to the end user.</p>
+<h5 id="session">Session</h5>
+<p>The interactions between the user and the app in general, does not depend on the previous selections made by the user, as there is no explicit save of user history, unless user turns on the preferences option in the settings.</p>
+<h3 id="pseudo-code">Pseudo code</h3>
+<p>Adapter Transport API</p>
+<pre><code>GET URL = &#39;https://timetable.search.ch/api/&#39;
+SET ClientIpAddress
+SET ClientUserAgent
+
+function sendAndParseQuery(query)  \\parses the query from the client side, fetches the result on the timetable.ch link
+  {
+     response = sendQuery(query)
+     if (response =isServerError()) {
+         throw Exception(‘&#39;Server error from timetable.search.ch: &#39;.response-&gt;getStatusCode().&#39; &#39;.response-&gt;getReasonPhrase());
+   }
+   content = response-&gt;getContent();
+   result = json_decode(content);
+
+        if (response-&gt;getStatusCode() == 429) {
+            throw new HttpException(429, &#39;Rate limit error from timetable.search.ch: &#39;.content);
+        .
+        .
+        .
+
+        return result;
+    }
+function sendQuery(query, url = self::URL)
+    {
+        formRequest = query-&gt;toFormRequest();
+        formRequest-&gt;setField(&#39;ip_address&#39;, this-&gt;clientIpAddress);
+        formRequest-&gt;setField(&#39;user_agent&#39;, this-&gt;clientUserAgent);
+
+        return this-&gt;browser-&gt;send(formRequest);
+    }
+function findConnections(ConnectionQuery) \\ performs the response action for user asking for connections between two locations
+    {
+        result = this-&gt;sendAndParseQuery(query);
+        connections = [];
+
+        from = null;
+        to = null;
+        stations = [
+            &#39;from&#39; =&gt; [],
+            &#39;to&#39;   =&gt; [],
+        ];
+    result = [
+            &#39;connections&#39; =&gt; connections,
+            &#39;from&#39;        =&gt; from,
+            &#39;to&#39;          =&gt; to,
+            &#39;stations&#39;    =&gt; stations,
+        ];
+
+        return result;
+    }
+function findLocations(LocationQuery query) \\ performs response action for user asking for locations on the map
+    {
+        result = this-&gt;sendAndParseQuery(query);
+        locations = [];
+        foreach (result as location) {
+            locations[] = Entity\LocationFactory::createFromJson(location);
+        }
+
+        return locations;
+    }
+function getStationBoard(StationBoardQuery query) \\performs response action for user asking for station details
+    {
+        result = this-&gt;sendAndParseQuery(query);
+        station = Station::createStationFromJson(result-&gt;stop);
+        journeys = [];
+        if (result-&gt;connections) {
+            foreach (result-&gt;connections as connection) {
+                journey = Entity\Schedule\StationBoardJourney::createFromJson(connection, null);
+                journey-&gt;stop-&gt;station = station;
+                journeys[] = journey;
+            }
+        }
+        stationboard = [&#39;station&#39; =&gt; station, &#39;stationboard&#39; =&gt; journeys];
+        return stationboard;
+    }
+}
+</code></pre>
+<p>Adapter Firebase API</p>
+<p>Getting categories:</p>
+<pre><code>function getAllCategories = async (req: Request, res: Response) =&gt; {
+  try {
+    function allCategories = await db.collection(&#39;Categories&#39;).get()
+    return res.status(200).json(allCategories.docs)
+  } catch(error) { return res.status(500).json(error.message) }
+}
+export { addCategory, getAllCategories }
+</code></pre>
+<p>Getting places:</p>
+<pre><code>function findPlace(string input, string inputType, array  = []) \\ performs response action for user requesting places 
+    {
+        response = makeRequest(self::FIND_PLACE, )
+        return convertToCollection(response, &#39;candidates&#39;)
+    }
+function nearbySearch(string location, string radius = null, array  = []) \\ performs response action for user requesting places near their location
+    {
+        response = makeRequest(self::NEARBY_SEARCH_URL, )
+        return convertToCollection(response, &#39;results&#39;)
+    }
+function placeDetails(string placeId, array  = []) \\ performs response action for user requesting places
+    {
+        response = makeRequest(self::DETAILS_SEARCH_URL, )
+        return convertToCollection(response)
+    }    
+function getOptions(array , string method = &#39;get&#39;) \\gets response for user requesting options
+    {
+        options = [
+            &#39;query&#39; =&gt; [
+                &#39;key&#39; =&gt; key,
+            ],
+        ]
+        if (method == &#39;post&#39;) {
+            options = array_merge([&#39;body&#39; =&gt; json_encode()], options)
+        } else {
+            options[&#39;query&#39;] = array_merge(options[&#39;query&#39;], )
+        }
+        
+        options[&#39;http_errors&#39;] = false
+        
+        if (!empty(headers)) {
+            options[&#39;headers&#39;] = headers
+        }
+        return options
+</code></pre>
+<h3 id="improvement-of-model">Improvement of Model</h3>
+<p>I believe that the current model of the system is already exhibiting minimized coupling, the user interface has only two external dependencies, the database,payment gateway and transport. However in the payment option, instead of having the necessary adapter connect api (which enables creation of custom accounts in Stripe), this option can be kept optional thus leaving with only one api that is the Stripe API acting as the adapter.</p>
+<h1 id="ex---physical-and-deployment-views"><span class='task'>12.</span>  Physical and Deployment Views</h1>
+<section class="instructions"><p>a. Extend your architectural model with the following viewpoints:</p>
+<ol>
+<li><p>Physical or Container View</p>
+</li>
+<li><p>Deployment View</p>
+</li>
+</ol>
+<p>Your model should be non-trivial: include more than one physical device/virtual container (or both). Be ready to discuss which connectors are found at the device/container boundaries.</p>
+<p>b. Write an ADR about which deployment strategy you plan to adopt. The alternatives to be considered are: big bang, blue/green, shadow, pilot, gradual phase-in, canary, A/B testing.</p>
+</section><h3 id="physical-view">Physical view</h3>
+<img src="./puml_e25.svg"><p>The web server 1 is for Stripe, and the web server 2 is for Transport.</p>
+<h3 id="deployment-view">Deployment View</h3>
+<img src="./puml_e26.svg"><p>The mobile Android device is host to and responsible for the Local guide mobile APK. Within the application there are several components that provide the core functionality of the application and are responsible for communication with Google Firebase and Google Cloud.</p>
+<p>The Google cloud servers contains several elements. The Firebase console component is essential for managing the services/analytics that Google Firebase provides but it is also crucial for managing data requests from the local guide mobile application. The console communicates with the database which has a container for storing all relevant information created by the local guide application as collections (which goes beyond the scope).</p>
+<h2 id="adr-for-deployment-strategy">ADR for Deployment Strategy</h2>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Pilot</p>
+<ol start="2">
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p> What will be the most suitable deployment strategy for an app catering to the needs of a particular target audience locally?</p>
+<ol start="3">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Pilot</li>
+<li>Canary</li>
+<li>A/B Testing</li>
+<li>Gradual Phase in</li>
+</ul>
+<ol start="4">
+<li>Which one did you choose?</li>
+</ol>
+<p>Pilot</p>
+<ol start="5">
+<li>What is the main reason for that?</li>
+</ol>
+<p>The pilot is somewhat closely related to the big bang appraoch, but offers a slight different insight. With this strategy, instead of going live all at once, the application is deployed to a small and targeted group of users who can use the system in a controlled environment. This helps to gather user feedback, make changes and adjustments and improve the overall quality of the application.</p>
+<ol start="6">
+<li>List the positive consequences (pros) of your decision:</li>
+</ol>
+<ul>
+<li>If there are problems in the application, they are easier to catch and rectify if deployed initially to a limited set of users</li>
+<li>A bit cheaper than having multiple versions in production, as only one version is in usage.</li>
+</ul>
+<h1 id="ex---availability-and-services"><span class='task'>13.</span>  Availability and Services</h1>
+<section class="instructions "><p>The goal of this week is to plan how to deliver your software as a service with high availability.</p>
+<ol>
+<li>If necessary, change your deployment design so that your software is hosted on a server (which could be running as a Cloud VM). Your SaaS architecture should show how your SaaS can be remotely accessed from a client such as a Web browser, or a mobile app</li>
+<li>Sketch your software as a service pricing model (optional)</li>
+<li>How would you define the availability requirements in your project domain? For example, what would be your expectation for the duration of planned/unplanned downtimes or the longest response time tolerated by your clients?</li>
+<li>Which strategy do you adopt to monitor your service&#39;s availability? Extend your architecture with a watchdog or a heartbeat monitor and motivate your choice with an ADR.</li>
+<li>What happens when a stateless component goes down? model a sequence diagram to show what needs to happen to recover one of your critical stateless components</li>
+<li>How do you plan to recover stateful components? write an ADR about your choice of replication strategy and whether you prefer consistency vs. availability. Also, consider whether event sourcing would help in your context.</li>
+<li>How do you plan to avoid cascading failures? Be ready to discuss how the connectors (modeled in your connector view) impact the reliability of your architecture.</li>
+<li>How did you mitigate the impact of your external dependencies being not available? (if applicable)</li>
+</ol>
+</section><h2 id="1">1.</h2>
+<img src="./puml_e27.svg"><h2 id="2--saas-pricing-model">2.  SaaS Pricing Model</h2>
+<p>Freemium Model will be the most benefical saas pricing model for my application as it is a travel app, users would first like to try it and see what features or functionalities they actually prefer or might not in the initial stage. So keeping that in mind, under the freemium model - there will be two versions essentially:</p>
+<p>Free Version</p>
+<ul>
+<li>Search and Maps navigation</li>
+<li>Recommendations based on user preference</li>
+<li>Reviews and feedback</li>
+<li>Offline access</li>
+</ul>
+<p>Premium Version
+Having two subscription options: monthly subscription at $4 and annual subscription at $18</p>
+<ul>
+<li>20% discount at all stores affiliated with Local guide</li>
+<li>Booking services for both transport and tours</li>
+<li>Translation services<pre><code>What content do you intend to translate? In which languages? 
+</code></pre>
+</li>
+<li>Currency Converter</li>
+<li>Customized Itinerary generator</li>
+</ul>
+<h2 id="3-availability-requirements">3. Availability Requirements</h2>
+<p>Being available as a travel app that is accesible to the user to guide them is important. They would want that all the important information is displayed, the maps navigation and search queries work effortlessly. The load of availability increases with the premium users, as they have access to more features within the app. The average database query time should be around 100-200ms, considering that the database is deployed on cloud. The average load time should be under 5 seconds max, or users can lose interest easily as compared to the best practice to display content to the users under 3 seconds.</p>
+<pre><code>what would be your expectation for the duration of planned/unplanned downtimes?
+</code></pre>
+<h2 id="4-monitor-availability">4. Monitor Availability</h2>
+<img src="./puml_e28.svg"><h3 id="adr-for-component-to-monitor-availability">ADR for Component to monitor availability</h3>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Watchdog to keep track of availability of our services.</p>
+<ol start="2">
+<li>What are the constraints?</li>
+</ol>
+<ul>
+<li>Different watchdogs will have to be implemented for each of the services to be monitored seperately.</li>
+</ul>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>As the decision involves monitoring of every component&#39;s tasks, it does affect the entire architecture.</p>
+<ol start="3">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Watchdog</li>
+<li>Heartbeat</li>
+</ul>
+<ol start="4">
+<li>Which one did you choose?</li>
+</ol>
+<p>Watchdog</p>
+<ol start="5">
+<li>What is the main reason for that?</li>
+</ol>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>cost effective method of detecting and handling faults</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>Watchdog clock stops functioning ( if the watchdog is not getting clock cycles then it is not able to run its code for faults)</li>
+</ul>
+<h2 id="5-stateless-component-recovery">5. Stateless Component Recovery</h2>
+<img src="./puml_e29.svg"><pre><code>What does the &quot;recoveryDb()&quot; function do?
+</code></pre>
+<h2 id="6-recovery-of-stateful-components">6. Recovery of Stateful Components</h2>
+<p>The most efficient way to recover the failure of a stateful component, is storing the same data (replicas) in multiple locations, which will be achieved by the below discussed replication strategy.</p>
+<h3 id="adr-for-replication-strategy">ADR for Replication Strategy</h3>
+<ol>
+<li>What did you decide?</li>
+</ol>
+<p>Asynchronous Replication</p>
+<ol start="2">
+<li>What was the context for your decision?</li>
+</ol>
+<p>It is evident that the stateful component, which in our case is the main database itself, has good probability of going down, which will lead to the entire loss of application data, which is undesirable. Having replicas of the data ensures that a consistent backup is maintained in the event of a disaster, hardware catastrophe, or a system breach, which can compromise data.</p>
+<p>What is the goal you are trying to achieve?</p>
+<p>What are the various ways in which the stateful component can be replicated for safekeeping?</p>
+<p>What are the constraints?</p>
+<ul>
+<li>A sound number of replicas will have to be created, with atleast one replica being the minimum requirement.</li>
+<li>We would want the travel app to provide eventual consistency in its operations, but there could be a possibility  that data in the replicas is not consistent.</li>
+</ul>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>As the decision pertains only to the stateful component, it does not affect the entire architecture.</p>
+<ol start="3">
+<li>What is the problem you are trying to solve?</li>
+</ol>
+<p>Is there possible way of recovery for a stateful component without major data loss?</p>
+<ol start="4">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Asynchronous replication</li>
+<li>Synchronous replication</li>
+</ul>
+<ol start="5">
+<li>Which one did you choose?</li>
+</ol>
+<p>Asynchronous Replication</p>
+<ol start="6">
+<li>What is the main reason for that?</li>
+</ol>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>It is designed to work over long distances. Since the replication process does not have to occur in real time, asynchronous replication can tolerate some degradation in connectivity</li>
+<li>More resilient than synchronous replication, as in synchronous - a single failure could cause loss of service and viruses or other malicious components that cause data corruption might be replicated to the second copy of the data.</li>
+<li>Provides fast response and has the least impact on the response time of the primary application</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>Data loss might occur at the secondary site after primary site or network failures</li>
+</ul>
+<p>At this stage, event sourcing is not helpful in my context, as the application provides direct information to the user and there is no usage for storage of related events that happened previously. </p>
+<h2 id="7-avoid-cascading-failures">7. Avoid Cascading Failures</h2>
+<p>When one service synchronously invokes another there is always the possibility that the other service is unavailable or is exhibiting such high latency it is essentially unusable. In such a case, implementation of Circuit Breaker helps in preventing failires and enable resilience.</p>
+<p>Essentially, resilience4j is one such lightweight and fault tolerant library that allows the integration of a circuit breaker within the system.
+It is implemented via a finite state machine with three normal states: CLOSED, OPEN and HALF_OPEN and two special states DISABLED and FORCED_OPEN and uses a sliding window to store and aggregate the outcome of calls.</p>
+<p>The pros would be that such a methodology would be helpful to respond to a hazardous condition and makes the system fault tolerant at a fine level of activity.
+But the cons are that testing could be hard, as variety of ailure responses need to be in force and these responses need to be tested.</p>
+<h2 id="8-mitigation-of-external-dependices">8. Mitigation of External Dependices</h2>
+<p>In my application, a lot of the functions provided need the assistance of external components such as the transport services and payment gateway. At this point there is an external dependency to these features as there is no efficient way of providing those services to the users, but the following steps could be implemented in practice to manage them better:</p>
+<ul>
+<li><p>Selecting dependencies with least amount of issues: checking the tone of the discussions, the age of the topics, to get a sence of how fast the bags are getting resolved, as the application shouldn&#39;t be holding a bug which hasn&#39;t been fixed in the past 1 year.</p>
+</li>
+<li><p>Checking quality of the code : Some libraries or components are often starting as side projects, which means they become unmaintained because of various reasons. So before the application is integrated with such components, the code should be checked for its usability and in cases it is not - moving onto a suitable replacement or modifying the functionality of the app.</p>
+</li>
+<li><p>Removing dependency from the scope: The safest option is to implement the missing function on our own, though it could be time consuming and increase the resource requirements, but it will eliminate any future issues.</p>
+</li>
+</ul>
+<h1 id="ex---scalability"><span class='task'>14.</span>  Scalability</h1>
+<section class="instructions "><p>Now that your architecture delivers your software as a service, let&#39;s redesign it so that it can scale!</p>
+<ol>
+<li><p>Pick one scalability dimension: number of clients, size of input, size of state, number of dependencies</p>
+</li>
+<li><p>How well does your architecture scale along the chosen dimension? Where do you expect the bottleneck to be?</p>
+</li>
+<li><p>Modify your architecture to remove the scalability bottleneck you have identified (show both logical, process and deployment view) - consider whether the API/interface of the bottleneck component should be improved.</p>
+</li>
+<li><p>Write an ADR regarding the scalability pattern you have introduced.</p>
+</li>
+<li><p>Write an ADR regarding the issue of component discovery, choosing one of the alternatives: dependency injection vs. directory. Can you identify an existing component playing the role of directory/dependency injection container? Could you give an example of where you would need to add such component to facilitate dynamic component discovery?
+}</p>
+</li>
+</ol>
+<h2 id="scalability-dimension-1--number-of-clients">Scalability dimension 1 : Number of clients</h2>
+<ol>
+<li><p>The architecture does not really scale well if the number of clients increases, because this would lead to more requests send, and more API calls, so the bottleneck will be essentially between the user interface and the database, where data is being sent to and fro from the server</p>
+</li>
+<li><p>Improvements</p>
+</li>
+</ol>
+<h4 id="logical-view-2">Logical View</h4>
+<img src="./puml_e30.svg"><p>The firebase apis namely maps, places and hotels will be connected to Firebase as well, it isn&#39;t shown in the diagram due to readability issues.</p>
+<h4 id="process-view">Process View</h4>
+<img src="./puml_e31.svg"><h4 id="deployment-view-1">Deployment View</h4>
+<img src="./puml_e32.svg"><ol start="3">
+<li><p>ADR for scalability pattern</p>
+</li>
+<li><p>What did you decide?</p>
+</li>
+</ol>
+<p>Load Balancer, with round robin functionality</p>
+<ol start="2">
+<li>What is the goal you are trying to achieve?</li>
+</ol>
+<p>How can I handle the server overload so it does not defer the Server/API performance?</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision affects the performance of the entire architecture.</p>
+<ol start="3">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Master/Worker</li>
+<li>Sharding</li>
+<li>Load Balancer</li>
+</ul>
+<ol start="4">
+<li>Which one did you choose?</li>
+</ol>
+<p>Load Balancer</p>
+<ol start="5">
+<li>What is the main reason for that?</li>
+</ol>
+<p>List the positive consequences (pros) of your decision:</p>
+<ul>
+<li>It will help distribute client request efficiently, during querying and searching</li>
+<li>It acts like an invisible facilitator to users. They can’t see but have their requests routed through it all the time. For example, a user shopping for home products will browse different options before choosing one or more. When the user clicks on a product, the client device sends an information request to backend servers. A load balancer receives this incoming request and routes it to all capable servers.</li>
+</ul>
+<p>If any, list the negative consequences (cons)</p>
+<ul>
+<li>No detection for  obsolete information</li>
+</ul>
+<ol start="4">
+<li><p>ADR for component discovery</p>
+</li>
+<li><p>What did you decide?</p>
+</li>
+</ol>
+<p>Directory</p>
+<ol start="2">
+<li>What is the goal you are trying to achieve?</li>
+</ol>
+<p>How can we guarantee a dependency directory for the clients to search through and pass their requests?</p>
+<p>What is the scope of your decision? Does it affect the entire architecture?</p>
+<p>The decision affects the performance of the entire architecture.</p>
+<ol start="3">
+<li>Which alternative options did you consider?</li>
+</ol>
+<ul>
+<li>Dependency Injection</li>
+<li>Directory</li>
+</ul>
+<ol start="4">
+<li>Which one did you choose?</li>
+</ol>
+<p>Directory</p>
+<ol start="5">
+<li>What is the main reason for that?</li>
+</ol>
+<p>The directory will act as the main component that houses the details for all the interfaces of the API&#39;s that will be used in client-server communication, not only that in case of server inavailablity or overload - it will be able to direct the request towards the replica.</p>
+<h2 id="scalability-dimension-2--size-of-state">Scalability dimension 2 : Size of state</h2>
+<ol>
+<li><p>The architecture does not scale well if the dataset size increases, or the application demands for more storage. The main bottleneck will be found at the database, as there is only one prevalent in the architecture.</p>
+</li>
+<li><p>As of now the main focus is on the usage of a single database, but as the application is centered around provided users with up to date information about a range of categories, this will gradually cause an increase in the dataset size as well - which in turn demands for more storage.</p>
+</li>
+</ol>
+<p> For this particular problem to be resolved, the technique of &quot;Sharding&quot; will be utilised. This will involve the distribution of a single datatset across multiple databases, which later will be stored on multiple machines. It will assist the load balancer to distribute client requests more efficiently and conduct parallel operations</p>
+<h4 id="logical-view-3">Logical View</h4>
+<img src="./puml_e33.svg"><h4 id="deployment-view-2">Deployment View</h4>
+<img src="./puml_e34.svg"><h1 id="ex---flexibility"><span class='task'>15.</span>  Flexibility</h1>
+<section class="instructions "><p>Only dead software stops changing. You just received a message from your customer, they have an idea. Is your architecture ready for it?</p>
+<ol>
+<li><p>Pick a new use case scenario. Precisely, what exactly do you need to change of your existing architecture so that it can be supported? Model the updated logical/process/deployment views.</p>
+</li>
+<li><p>Pick another use case scenario so that it can be supported without any major architectural change (i.e., while you cannot add new components, it is possible to extend the interface of existing ones or introduce new dependencies). Illustrate with a process view, how your previous design can satisfy the new requirement.</p>
+</li>
+<li><p>Change impact. One of your externally sourced component/Web service API has announced it will introduce a breaking change. What is the impact of such change? How can you control and limit the impact of such change? Update your logical view</p>
+</li>
+<li><p>Open up your architecture so that it can be extended with plugins by its end-users. Where would be a good extension point? Update your logical view and give at least one example of what a plugin would actually do.</p>
+</li>
+<li><p>Assuming you have a centralized deployment with all stateful components storing their state in the same database, propose a strategy to split the monolith into at least two different microservices. Model the new logical/deployment view as well as the interfaces of each microservice you introduce.</p>
+</li>
+</ol>
+</section><h2 id="1-new-use-case-scenario">1. New Use case Scenario</h2>
+<p>One of the important features that would be beneficial to introduce will be the addition of translation services, which will be modelled in the current architecture under the Services component as a sub component, and connected to the database by the Firebase Translation API.</p>
+<h4 id="logical-view-4">Logical View</h4>
+<img src="./puml_e35.svg"><h4 id="process-view-1">Process View</h4>
+<img src="./puml_e36.svg"><h4 id="deployment-view-3">Deployment View</h4>
+<img src="./puml_e37.svg"><h2 id="2-second-use-case-scenario">2. Second Use Case Scenario</h2>
+<p>For the second use case scenario, say the user wants to earn more benefits by collaborating with the local shops, or the student settlement agencies, or student houses, to earn additional benefits or discounts, the component Mode : which consisted of traveller and settler mode will be extended to adding travel recommendations/trip reviews for the users choosing the traveller mode and student reviews/suggestions for users in settler mode.</p>
+<p>The changes won&#39;t be too drastic, instead of just having one selection within the mode component, it will have an option for adding reviews or recommendations and option of selecting the desired place to be reviewed from the places listed in the app.</p>
+<img src="./puml_e38.svg"><h2 id="3-impact-of-changes-in-api">3. Impact of changes in API</h2>
+<p>Suppose Firebase API&#39;s or any of the Google API&#39;s change their internal functionality, there would be no new modification to the logical view, as the API is already under the adapter Firebase Helper.</p>
+<h2 id="4-plugin">4. Plugin</h2>
+<p>One of the places wherein a plugin will be beneficial is the booking component, as the component as of now has limited functionality, allowing users only to look through trips and tours but no route for users to manage their travel bookings or itinerary schedules. Using the plugin, they will be able to customize their tour packages and keep count of their bookings and upcoming schedules.</p>
+<p>The plugin component will be added to the Bookings component as shown below:</p>
+<img src="./puml_e39.svg"><h4 id="example-usage">Example usage</h4>
+<p>One of the main usages will be keeping account of user&#39;s bookings and allowing them to customize their travel itinerary and add it to the booking calendar and also set up automatic calendar notifications so you will receive an email when a booking is made. </p>
+<h2 id="5-microservices">5. Microservices</h2>
+<h3 id="logical-view-5">Logical View</h3>
+<h3 id="deployment-view-4">Deployment View</h3>
+
+    </main>
+
+
+<footer>
+
+</footer>
+
+</body>
+
+</html>

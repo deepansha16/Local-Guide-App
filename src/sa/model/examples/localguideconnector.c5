@@ -1,0 +1,4 @@
+UserInterface-> web ConnectAPI -> Stripe
+UserInterface -> web REST -> Firebase
+Stripe -> web StripeAPI -> Firebase
+UserInterface-> web TransportAPI -> Swiss Public Transport
