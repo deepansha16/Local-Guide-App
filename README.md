@@ -1,5 +1,4 @@
 
-https://github.com/deepansha16/local-guide-app/assets/49023785/3923e745-023e-4a89-b1fc-928490dac854
 # local-guide-app
 Architectural modeling of the Local Guide mobile application
 
