@@ -1,5 +1,5 @@
 # local-guide-app
-Architectural modelling of the Local Guide mobile application
+Architectural modeling of the Local Guide mobile application
 
 To run the file, firstly install the following:
 
