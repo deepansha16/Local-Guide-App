@@ -2963,7 +2963,9 @@ One of the main usages will be keeping account of user's bookings and allowing t
 
 ### Logical View
 
+![d3](https://github.com/deepansha16/local-guide-app/assets/49023785/94b0b6fa-e40a-4349-bd2d-5a532995f86e)
 
 
 ### Deployment View
+![d4](https://github.com/deepansha16/local-guide-app/assets/49023785/42e55d09-4e1f-486b-baa1-8627f118374a)
 
