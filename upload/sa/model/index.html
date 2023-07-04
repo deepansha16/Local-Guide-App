@@ -401,7 +401,7 @@ More localized view of things, considering a students point of view - keeping in
 </section><h2 id="example-scenario">Example Scenario</h2>
 <p>Quality: <em>Recoverability</em></p>
 <p>Scenario: In case of power failure, rebooting the system should take up to 20 seconds.</p>
-<p><img src="/Users/deepanshachowdhary/Documents/software-architecture-model-deepansha16/upload/sa/model/puml_e2.svg" alt="file"></p>
+<p><img src="/Users/deepanshachowdhary/Desktop/local-guide-app/upload/sa/model/puml_e2.svg" alt="file"></p>
 <img src="./puml_e1.svg"><h2 id="local-guide-scenarios">Local Guide Scenarios</h2>
 <p>Quality: <em>Availability</em></p>
 <p>Scenario: In case of loss of network connectivity on the users side, the system is supposed to fetch the required data from realm, and sync it with the interface to be displayed to the user.</p>
@@ -567,7 +567,7 @@ More localized view of things, considering a students point of view - keeping in
 </section><h2 id="api-specification">API Specification:</h2>
 <img src="./puml_e21.svg"><p>Local Guide component refers to the database created inside the Firebase console.</p>
 <h2 id="open-api-description">Open API Description</h2>
-<p><img src="./examples/api.png" alt="Local guide Open API Description"> </p>
+<p><img src="/Users/deepanshachowdhary/Desktop/local-guide-app/src/sa/model/examples/api.png" alt="Local guide Open API Description"> </p>
 <h1 id="ex---connector-view"><span class='task'>10.</span>  Connector View</h1>
 <section class="instructions"><p>Extend your existing models introducing the connector view</p>
 <p><img src="./c5_1.svg" alt="Example Connector View Diagram"></p>
@@ -664,27 +664,7 @@ function getPlacesNearMe</p>
 </li>
 </ol>
 <h3 id="wrapper">Wrapper</h3>
-<img src="./puml_e24.svg"><section class="feedback"><p>Please rewire the wrapper to use the following structure:</p>
-<pre><code>@startuml
-interface External as I
-component Wrapper {
-
-component Adapter
-
-Adapter - I
-
-component Incompatible
-interface Internal as i
-
-Incompatible - i
-
-Adapter --( i
-
-}
-@enduml
-</code></pre>
-<p>The Adapter component is missing from your model</p>
-</section><h3 id="standard-interfaces">Standard Interfaces</h3>
+<img src="./puml_e24.svg"><h3 id="standard-interfaces">Standard Interfaces</h3>
 <p>Considering the standard interfaces required in the tourism domain,almost all of the components of the bottom-up model conform to the most widely used interfaces when designing of such an application. So for example, in the category of platforms- mobile apps are more in demand than websites/web apps, and the widely used databases for such domains include: Firebase, MySQL, SQLite, MongoDB etc. Earlier in the top-up model, unconventional databases (like RealmDB) were being used, but the model that currently stands is refined to set of standards defined.</p>
 <h3 id="coupling-facets">Coupling Facets</h3>
 <h5 id="platform-independence">Platform Independence</h5>
@@ -892,18 +872,19 @@ function getOptions(array , string method = &#39;get&#39;) \\gets response for u
 <p>Premium Version
 Having two subscription options: monthly subscription at $4 and annual subscription at $18</p>
 <ul>
-<li>20% discount at all stores affiliated with Local guide</li>
-<li>Booking services for both transport and tours</li>
-<li>Translation services<pre><code>What content do you intend to translate? In which languages? 
-</code></pre>
+<li><p>20% discount at all stores affiliated with Local guide</p>
 </li>
-<li>Currency Converter</li>
-<li>Customized Itinerary generator</li>
+<li><p>Booking services for both transport and tours</p>
+</li>
+<li><p>Translation services</p>
+</li>
+<li><p>Currency Converter</p>
+</li>
+<li><p>Customized Itinerary generator</p>
+</li>
 </ul>
 <h2 id="3-availability-requirements">3. Availability Requirements</h2>
 <p>Being available as a travel app that is accesible to the user to guide them is important. They would want that all the important information is displayed, the maps navigation and search queries work effortlessly. The load of availability increases with the premium users, as they have access to more features within the app. The average database query time should be around 100-200ms, considering that the database is deployed on cloud. The average load time should be under 5 seconds max, or users can lose interest easily as compared to the best practice to display content to the users under 3 seconds.</p>
-<pre><code>what would be your expectation for the duration of planned/unplanned downtimes?
-</code></pre>
 <h2 id="4-monitor-availability">4. Monitor Availability</h2>
 <img src="./puml_e28.svg"><h3 id="adr-for-component-to-monitor-availability">ADR for Component to monitor availability</h3>
 <ol>
@@ -941,9 +922,7 @@ Having two subscription options: monthly subscription at $4 and annual subscript
 <li>Watchdog clock stops functioning ( if the watchdog is not getting clock cycles then it is not able to run its code for faults)</li>
 </ul>
 <h2 id="5-stateless-component-recovery">5. Stateless Component Recovery</h2>
-<img src="./puml_e29.svg"><pre><code>What does the &quot;recoveryDb()&quot; function do?
-</code></pre>
-<h2 id="6-recovery-of-stateful-components">6. Recovery of Stateful Components</h2>
+<img src="./puml_e29.svg"><h2 id="6-recovery-of-stateful-components">6. Recovery of Stateful Components</h2>
 <p>The most efficient way to recover the failure of a stateful component, is storing the same data (replicas) in multiple locations, which will be achieved by the below discussed replication strategy.</p>
 <h3 id="adr-for-replication-strategy">ADR for Replication Strategy</h3>
 <ol>

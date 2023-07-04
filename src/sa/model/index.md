@@ -253,7 +253,7 @@ Quality: _Recoverability_
 
 Scenario: In case of power failure, rebooting the system should take up to 20 seconds.
 
-![file](/Users/deepanshachowdhary/Documents/software-architecture-model-deepansha16/upload/sa/model/puml_e2.svg)
+![file](/Users/deepanshachowdhary/Desktop/local-guide-app/upload/sa/model/puml_e2.svg)
 
 ```puml
 @startuml
@@ -1362,7 +1362,8 @@ skinparam shadowing false
 
 Local Guide component refers to the database created inside the Firebase console.
 ## Open API Description
-![Local guide Open API Description](./examples/api.png) 
+![Local guide Open API Description](/Users/deepanshachowdhary/Desktop/local-guide-app/src/sa/model/examples/api.png
+) 
 
 # Ex - Connector View
 
@@ -1649,32 +1650,6 @@ AD - UserInterface
 @enduml
 ```
 
-{.feedback
-
-Please rewire the wrapper to use the following structure:
-```
-@startuml
-interface External as I
-component Wrapper {
-
-component Adapter
-
-Adapter - I
-
-component Incompatible
-interface Internal as i
-
-Incompatible - i
-
-Adapter --( i
-
-}
-@enduml
-```
-
-The Adapter component is missing from your model
-
-}
 
 ### Standard Interfaces
 Considering the standard interfaces required in the tourism domain,almost all of the components of the bottom-up model conform to the most widely used interfaces when designing of such an application. So for example, in the category of platforms- mobile apps are more in demand than websites/web apps, and the widely used databases for such domains include: Firebase, MySQL, SQLite, MongoDB etc. Earlier in the top-up model, unconventional databases (like RealmDB) were being used, but the model that currently stands is refined to set of standards defined.
@@ -2027,18 +2002,13 @@ Having two subscription options: monthly subscription at $4 and annual subscript
 * 20% discount at all stores affiliated with Local guide
 * Booking services for both transport and tours
 * Translation services
-```
-What content do you intend to translate? In which languages? 
-```
+
 * Currency Converter
 * Customized Itinerary generator
 
 ## 3. Availability Requirements
 
 Being available as a travel app that is accesible to the user to guide them is important. They would want that all the important information is displayed, the maps navigation and search queries work effortlessly. The load of availability increases with the premium users, as they have access to more features within the app. The average database query time should be around 100-200ms, considering that the database is deployed on cloud. The average load time should be under 5 seconds max, or users can lose interest easily as compared to the best practice to display content to the users under 3 seconds.
-```
-what would be your expectation for the duration of planned/unplanned downtimes?
-```
 ## 4. Monitor Availability
 
 ```puml
@@ -2170,9 +2140,7 @@ skinparam shadowing false
 skinparam defaultFontName Courier
 @enduml
 ```
-```
-What does the "recoveryDb()" function do?
-```
+
 
 ## 6. Recovery of Stateful Components
 
